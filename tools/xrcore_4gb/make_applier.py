@@ -70,6 +70,8 @@ try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
 $OrigSha = "@@ORIGSHA@@"
 $PatchedSha = "@@PATCHEDSHA@@"
 $OrigLen = @@ORIGLEN@@
+# v1.5.0 of the patch (crashed while loading a level on a real add-on): replaced by this version, the original is taken from xrCore.dll.orig
+$OldPatchedSha = @("343C16D09FDC395DC19EE6BC5B3DCC31217B9BEBDFB100D7577AB626B29B7AAC")
 # byte changes inside the original file: (offset, new bytes as hex)
 $Hunks = @(
 @@HUNKS@@
@@ -124,6 +126,7 @@ $sha = Get-Sha $dll
 if ($Check) {
     if ($sha -eq $PatchedSha) { Write-Host "PATCHED: the >4 GiB patch is installed. / ПАТЧ УСТАНОВЛЕН." }
     elseif ($sha -eq $OrigSha) { Write-Host "NOT patched (original xrCore.dll of xrMPE 0.9). / НЕ пропатчен (оригинальный xrCore.dll)." }
+    elseif ($OldPatchedSha -contains $sha) { Write-Host "OLD patch (v1.5.0) installed, run this again to update it. / Установлен СТАРЫЙ патч (v1.5.0), запустите установку снова для обновления." }
     else { Write-Host "Unknown xrCore.dll (SHA-256 $sha). / Неизвестная версия xrCore.dll." }
     return
 }
@@ -140,6 +143,15 @@ if ($Uninstall) {
 }
 
 if ($sha -eq $PatchedSha) { Write-Host "Already patched. Nothing to do. / Уже пропатчено. Ничего делать не нужно."; return }
+if ($OldPatchedSha -contains $sha) {
+    if (-not (Test-Path -LiteralPath $backup) -or (Get-Sha $backup) -ne $OrigSha) {
+        throw "Old patch found but no valid backup (xrCore.dll.orig). Let the xrMPE launcher repair the game files, then run this again. / Найден старый патч, но нет копии xrCore.dll.orig. Пусть лаунчер xrMPE восстановит файлы игры и запустите снова."
+    }
+    Write-Host "Updating the earlier version of the patch (v1.5.0 could close the game while a level loads). / Обновляю прежнюю версию патча (v1.5.0 мог закрывать игру при загрузке уровня)." -ForegroundColor Yellow
+    try { Copy-Item -LiteralPath $backup -Destination $dll -Force }
+    catch { throw "Cannot write xrCore.dll. Close the game, the dedicated server and the launcher. / Не удалось записать xrCore.dll. Закройте игру, сервер и лаунчер." }
+    $sha = $OrigSha
+}
 if ($sha -ne $OrigSha) {
     Write-Host ""
     Write-Host "NOT PATCHED: this xrCore.dll is not the one the patch was made for (xrMPE 0.9, SHA-256 $OrigSha)." -ForegroundColor Red

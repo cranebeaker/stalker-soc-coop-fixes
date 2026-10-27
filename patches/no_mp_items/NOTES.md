@@ -74,3 +74,11 @@ keys go through the engine, and the mod's own scene effects (`xr_effects.disable
 Fix: `default_items` gives `mp_device_torch` again (knife and binoculars stay the normal items), and `gamedata\scripts\coop_scn_torch_fix.script`
 (server tick, every level) swaps the `device_torch` of players restored from 1.4 to 1.4.3 saves: release first, the new one on the next tick so it
 goes into the free flashlight slot.
+
+## Original artifact stats (v1.5.1)
+Report (maintainer FOSTER): "bring back the properties of the artifacts from the ORIGINAL SoC". Compared every `af_*_soc` section with the Steam SoC 1.0006
+`config\misc\artefacts.ltx` (inheritance resolved): 25 of 31 differed. The add-on had changed the price (Vyvert 1000 to 4000, Gravi 2500 to 6000, Gold Fish 5000 to 9000,
+Crystal 5000 to 1000, and more) and made every `*_restore_speed` 10 to 40 times the original (Medusa radiation 0.0005 to 0.01, Moonlight power 0.006 to 0.1, Soul health
+0.0006 to 0.007). The immunity sections already matched. `tools\restore_soc_artifact_stats.py <original artefacts.ltx> <artefacts_soc.ltx>` sets cost and the five
+restore speeds of each `_soc` section to the original numbers (bytes and encoding of the rest of the file stay). Checked in game: `system_ini()` reads the original numbers.
+Left as they are: `af_rank = 0` and `additional_inventory_weight = 0`, which the original has no line for (same effect).

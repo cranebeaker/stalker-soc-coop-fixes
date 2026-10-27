@@ -16,10 +16,12 @@ from unicorn.x86_const import *
 IB = 0x10000000
 pe = pefile.PE(sys.argv[1])
 secs = {s.Name.rstrip(b"\0").decode(): s for s in pe.sections}
-xpat, xpad = secs[".xpat"], secs[".xpad"]
+xpat, xpad = secs[".xpat2"], secs[".xpad2"]
 code = pe.__data__[xpat.PointerToRawData:xpat.PointerToRawData + xpat.SizeOfRawData]
 listing = open(sys.argv[2], encoding="utf-8").read()
 S5 = int(re.search(r"^; S5 .*-> cave ([0-9a-f]+)", listing, re.M).group(1), 16)
+N = 128
+S7 = int(re.search(r"^; S7 .*-> cave ([0-9a-f]+)", listing, re.M).group(1), 16)
 S6 = int(re.search(r"^; S6 .*-> cave ([0-9a-f]+)", listing, re.M).group(1), 16)
 TABLE = IB + xpad.VirtualAddress + 0x10
 IAT_GFS, IAT_UNMAP = IB + 0x350d4, IB + 0x350d0
@@ -30,6 +32,7 @@ mu = Uc(UC_ARCH_X86, UC_MODE_32)
 mu.mem_map(IB + xpat.VirtualAddress, 0x1000); mu.mem_write(IB + xpat.VirtualAddress, code[:0x1000])
 mu.mem_map(IB + xpad.VirtualAddress, 0x1000)
 mu.mem_map(IB + 0x35000, 0x1000)
+mu.mem_map(IB + 0x22000, 0x1000); mu.mem_write(IB + 0x22190, bytes([0xc3])); mu.mem_write(IB + 0x2241e, bytes([0x90]))   # map() stub and the instruction after the call in open_chunk
 mu.mem_map(IB + 0xb000, 0x1000)            # so that the jump back to 0x1000becf lands somewhere
 mu.mem_map(0x31000000, 0x1000)
 mu.mem_map(0x40000000, 0x10000)
@@ -70,8 +73,8 @@ mu.mem_write(ret_after_destroy, b"\xf4")
 
 
 def table():
-    raw = bytes(mu.mem_read(TABLE, 32 * 12))
-    return [struct.unpack_from("<III", raw, i * 12) for i in range(32)]
+    raw = bytes(mu.mem_read(TABLE, N * 12))
+    return [struct.unpack_from("<III", raw, i * 12) for i in range(N)]
 
 
 def hook_site(obj, ptr64_lo, ptr64_hi, size_lo, size_hi):
@@ -102,7 +105,7 @@ def check(name, cond, info=""):
     fails += 0 if cond else 1
 
 
-mu.mem_write(TABLE, b"\0" * (32 * 12))
+mu.mem_write(TABLE, b"\0" * (N * 12))
 # 1. a file of a plain (not add-on) archive: ptr64 = 0, not registered, construct still called
 c = hook_site(OBJ, 0, 0, 0x1000, 0)
 check("plain archive file: nothing registered, construct called once with this=ecx and the same argument pointers",
@@ -138,16 +141,42 @@ mu.mem_write(OBJ + 0x500 + 0x24, struct.pack("<I", 0))
 state["unmap"] = 0
 mu.emu_start(S6, ret_after_destroy + 1, count=5000)
 check("destroy of an unregistered reader changes nothing and unmaps", [e for e in table() if e[0]] == [(OBJ2, 1, 1)] and state["unmap"] == 1)
-# 8. the table holds 32 readers; the 33rd is simply not registered (and the original call still happens)
-mu.mem_write(TABLE, b"\0" * (32 * 12))
-for i in range(32):
+# 8. the table holds N readers; the one after is simply not registered (and the original call still happens)
+mu.mem_write(TABLE, b"\0" * (N * 12))
+for i in range(N):
     o = OBJ + 0x1000 + i * 0x40
     mu.mem_write(o, struct.pack("<I", VTABLE))
     hook_site(o, 0x10, 1, 0x30000000, 1)
-check("32 readers registered", len([e for e in table() if e[0]]) == 32)
+check("N readers registered", len([e for e in table() if e[0]]) == N)
 o = OBJ + 0x3000
 mu.mem_write(o, struct.pack("<I", VTABLE))
 c = hook_site(o, 0x10, 1, 0x30000000, 1)
-check("33rd reader: table full, not registered, construct still called", len([e for e in table() if e[0]]) == 32 and len(c) == 1 and c[0][0] == o)
+check("reader N+1: table full, not registered, construct still called", len([e for e in table() if e[0]]) == N and len(c) == 1 and c[0][0] == o)
+# 9. open_chunk child hook (S7): the child of a registered parent is registered with the parent's high dwords plus the carry of start + offset
+def chunk_site(parent, child, frame=STACK + 0xC000):
+    mu.mem_write(frame - 4, struct.pack("<I", parent))
+    esp = frame - 0x40
+    mu.reg_write(UC_X86_REG_ESP, esp); mu.reg_write(UC_X86_REG_EBP, frame)
+    mu.reg_write(UC_X86_REG_EBX, child); mu.reg_write(UC_X86_REG_ECX, child)
+    for r, v in ((UC_X86_REG_EAX, 0x11111111), (UC_X86_REG_EDX, 0x22222222), (UC_X86_REG_ESI, 0x33333333), (UC_X86_REG_EDI, 0x44444444)):
+        mu.reg_write(r, v)
+    mu.emu_start(S7, IB + 0x2241e + 1, count=5000)
+    return [mu.reg_read(r) for r in (UC_X86_REG_EAX, UC_X86_REG_EDX, UC_X86_REG_ESI, UC_X86_REG_EDI, UC_X86_REG_EBX, UC_X86_REG_ECX, UC_X86_REG_EBP)]
+
+
+mu.mem_write(TABLE, b"\0" * (N * 12))
+P, C, C2, C3 = OBJ + 0x100, OBJ + 0x200, OBJ + 0x300, OBJ + 0x400
+mu.mem_write(P + 0xc, struct.pack("<I", 0xFF000000))
+hook_site(P, 0xFF000000, 0, 0x30000000, 1)                       # the parent: registered by S5 (start_hi 0, size_hi 1)
+mu.mem_write(C + 0xc, struct.pack("<I", 0xFF000100))              # child inside the same 4 GiB block
+regs = chunk_site(P, C)
+t = sorted([e for e in table() if e[0]], key=lambda e: e[0])
+check("child below the wrap: registered with the parent's high dwords (0, 1), registers preserved", (C, 0, 1) in t and regs == [0x11111111, 0x22222222, 0x33333333, 0x44444444, C, C, STACK + 0xC000], (t, [hex(r) for r in regs]))
+mu.mem_write(C2 + 0xc, struct.pack("<I", 0x00000100))             # child start wrapped past 2^32
+chunk_site(P, C2)
+t = {e[0]: e[1:] for e in table() if e[0]}
+check("child whose start wrapped past 2^32: start_hi = parent's + 1", t.get(C2) == (1, 1), t.get(C2))
+chunk_site(OBJ + 0x700, C3)                                       # parent not registered (plain archive file)
+check("child of an unregistered parent: not registered", C3 not in {e[0] for e in table()})
 print("ALL PASS" if fails == 0 else "FAILED (%d)" % fails)
 sys.exit(1 if fails else 0)

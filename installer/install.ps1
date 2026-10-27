@@ -69,7 +69,7 @@ function Write-Field([byte[]]$h, [int]$off, [string]$s) {
     [Array]::Copy($b, 0, $h, $off, $b.Length)
 }
 
-# True when game\bin\xrCore.dll carries the 4 GiB patch (a section named .xpat, see xrcore_4gb\README.md).
+# True when game\bin\xrCore.dll carries the 4 GiB patch (a section named .xpat2, see xrcore_4gb\README.md).
 function Test-EnginePatched([string]$game) {
     try {
         $p = Join-Path $game "bin\xrCore.dll"
@@ -80,7 +80,7 @@ function Test-EnginePatched([string]$game) {
         $n = [int][BitConverter]::ToUInt16($b, $pe + 6)
         $st = $pe + 24 + [int][BitConverter]::ToUInt16($b, $pe + 20)
         for ($i = 0; $i -lt $n; $i++) {
-            if ([System.Text.Encoding]::ASCII.GetString($b, $st + 40 * $i, 8).TrimEnd([char]0) -eq ".xpat") { return $true }
+            if ([System.Text.Encoding]::ASCII.GetString($b, $st + 40 * $i, 8).TrimEnd([char]0) -eq ".xpat2") { return $true }
         }
     } catch {}
     return $false

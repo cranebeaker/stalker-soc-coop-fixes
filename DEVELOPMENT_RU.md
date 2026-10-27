@@ -128,7 +128,7 @@ powershell -ExecutionPolicy Bypass -File stop_live.ps1 -Name dbg
 Раньше `coop.addon` упирался в предел 4 ГиБ 32-битного движка. Теперь есть патч движка и установщик, которому предел не мешает. Всё в `tools\xrcore_4gb` (описание: `tools\xrcore_4gb\README.md`).
 
 - `python tools\xrcore_4gb\build_patch.py <оригинальный xrCore.dll> <пропатченный xrCore.dll>` собирает пропатченный движок и печатает листинг всего нового кода
-  (нужны `pip install capstone keystone-engine pefile`). Код патча лежит в двух новых секциях DLL (`.xpat` код, `.xpad` данные) и позиционно независим (в DLL включён ASLR).
+  (нужны `pip install capstone keystone-engine pefile`). Код патча лежит в двух новых секциях DLL (`.xpat2` код, `.xpad2` данные) и позиционно независим (в DLL включён ASLR).
 - `python tools\xrcore_4gb\make_applier.py <оригинал> <пропатченный> <папка>` делает `install_xrcore_patch.bat/.ps1`, установщик без Python: в нём только изменения байтов, не файл xrMPE.
 - `python tools\release_bundle.py 1.5.0 --xrcore-orig <оригинальный xrCore.dll>` собирает релиз: `SoC_COOP_fixes_v1.5.0.zip` (установщик + исправления + ролики + патч движка)
   и `SoC_COOP_4GB_patch.zip` (только патч движка). Ничего не публикует.

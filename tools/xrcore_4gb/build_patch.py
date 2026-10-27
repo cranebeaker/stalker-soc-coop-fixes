@@ -42,7 +42,8 @@ DATA_VSIZE = 0x1000
 DATA_RAW = 0x200
 H_RVA = DATA_RVA            # dword: how many times the tar position wrapped past 2^32
 TMPHI_RVA = DATA_RVA + 4    # dword: high half of a file's absolute position, from the cave to the Register call
-TABLE_RVA = DATA_RVA + 0x10  # 32 entries of 12 bytes: (CStreamReader*, start offset high dword, archive size high dword)
+TABLE_N = 128               # entries of the reader table
+TABLE_RVA = DATA_RVA + 0x10  # TABLE_N entries of 12 bytes: (CStreamReader*, start offset high dword, archive size high dword)
 IAT_GETFILESIZE_RVA = 0x350d4   # IAT slot of KERNEL32!GetFileSize (the code calls it as CALL dword ptr [0x100350d4])
 IAT_UNMAP_RVA = 0x350d0         # IAT slot of KERNEL32!UnmapViewOfFile (CALL dword ptr [0x100350d0])
 
@@ -63,6 +64,7 @@ def build(base, text):
     """assemble a cave placed at absolute address `base`.  A line `@L` marks the label L that follows a `call L`
     (position independent addressing: `pop reg` gives L at run time); {H}, {TMPHI}, {IAT} become 32-bit displacements
     from L to the data dwords / the GetFileSize IAT slot."""
+    text = text.replace("{N}", str(TABLE_N))
     text = text.replace("{CALC}", str(A(SEC_RVA)))      # the shared routine is the first cave
     if "@L" not in text:
         return asm(text, base)
@@ -89,7 +91,7 @@ CAVES = [
         @L
         pop ebx
         lea ebx, [ebx + {TABLE}]
-        mov ecx, 32
+        mov ecx, {N}
         find:
         cmp dword ptr [ebx], esi
         je found
@@ -393,7 +395,7 @@ CAVES = [
         or eax, edx
         jz skip
         lea ebx, [ebp + {{TABLE}}]
-        mov ecx, 32
+        mov ecx, {{N}}
         claim:
         xor eax, eax
         lock cmpxchg dword ptr [ebx], esi
@@ -410,6 +412,47 @@ CAVES = [
         popad
         call dword ptr [edx+4]
         jmp {A(0xbecf)}"""),
+    # CStreamReader::open_chunk builds the child reader inline (not through construct) and maps it with `call map` at 0x10022419.
+    # The child is a window into the same file: register it with its parent's high dwords (plus the carry of start + offset)
+    ("S7 CStreamReader::open_chunk: register the child reader of a registered parent", 0x2241e - 5, "e872fdffff", f"""
+        pushad
+        mov edi, dword ptr [ebp-4]
+        call L
+        @L
+        pop esi
+        lea esi, [esi + {{TABLE}}]
+        mov edx, esi
+        mov ecx, {{N}}
+        findp:
+        cmp dword ptr [edx], edi
+        je gotp
+        add edx, 12
+        dec ecx
+        jnz findp
+        jmp skip
+        gotp:
+        mov edi, dword ptr [edx+4]
+        mov eax, dword ptr [ebp-4]
+        mov ecx, dword ptr [ebx+0xc]
+        cmp ecx, dword ptr [eax+0xc]
+        adc edi, 0
+        mov ecx, {{N}}
+        claim:
+        xor eax, eax
+        lock cmpxchg dword ptr [esi], ebx
+        jz got
+        add esi, 12
+        dec ecx
+        jnz claim
+        jmp skip
+        got:
+        mov dword ptr [esi+4], edi
+        mov eax, dword ptr [edx+8]
+        mov dword ptr [esi+8], eax
+        skip:
+        popad
+        call {A(0x22190)}
+        jmp {A(0x2241e)}"""),
     # forget the reader when it is closed (CStreamReader::destroy = the whole 10 byte function)
     ("S6 CStreamReader::destroy: remove the reader from the table", 0x4650, "ff7124ff15d0500310c3", """
         push ebx
@@ -417,7 +460,7 @@ CAVES = [
         @L
         pop ebx
         lea eax, [ebx + {TABLE}]
-        mov edx, 32
+        mov edx, {N}
         unreg:
         cmp dword ptr [eax], ecx
         jne nxt
@@ -484,8 +527,8 @@ def main(src, dst):
 
     raw0 = len(data)
     hdr = bytearray(80)
-    struct.pack_into("<8sIIIIIIHHI", hdr, 0, b".xpat", SEC_VSIZE, SEC_RVA, SEC_RAW, raw0, 0, 0, 0, 0, 0x60000020)
-    struct.pack_into("<8sIIIIIIHHI", hdr, 40, b".xpad", DATA_VSIZE, DATA_RVA, DATA_RAW, raw0 + SEC_RAW, 0, 0, 0, 0, 0xC0000040)
+    struct.pack_into("<8sIIIIIIHHI", hdr, 0, b".xpat2", SEC_VSIZE, SEC_RVA, SEC_RAW, raw0, 0, 0, 0, 0, 0x60000020)
+    struct.pack_into("<8sIIIIIIHHI", hdr, 40, b".xpad2", DATA_VSIZE, DATA_RVA, DATA_RAW, raw0 + SEC_RAW, 0, 0, 0, 0, 0xC0000040)
     data[hdr_end:hdr_end + 80] = hdr
     struct.pack_into("<H", data, coff + 2, nsec + 2)
     struct.pack_into("<I", data, opt + 56, DATA_RVA + DATA_VSIZE)

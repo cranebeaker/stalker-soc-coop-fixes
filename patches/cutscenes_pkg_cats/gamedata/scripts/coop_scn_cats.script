@@ -91,6 +91,7 @@ end
 -- Agroprom: AGR_STALKER_HELP_1_INFO and a player inside the restrictor (unless the mole dialog is done,
 -- which sent the original logic to sr_idle@nil on clients)
 -------------------------------------------------------------------------------------------------------
+local agr_order_t = nil
 local AGR = {
 	zone = "agr_actor_cat_scene_space_restrictor",
 	walk = "agr_actor_cat_scene_1_walk", look = "agr_actor_cat_scene_1_look",
@@ -102,6 +103,15 @@ coop_scenes.register{
 	cam = { anm = AGR.anm, id = 9101, global = true },
 	trigger = function(ctx)
 		local ok, res = pcall(function()
+			-- The soldiers of the yard are invulnerable from the order flag until AGR_INVULNERABLE_OFF_INFO, which only this scene gives.
+			-- If the scene cannot run any more (Mole already talked to) or nobody ever starts it (party fights the soldiers outside the
+			-- zone), they stayed immortal for good: give the flag after the dialog, or 120 s after the order.
+			if ctx.flag("AGR_THE_ORDER_TO_KILL_STALKER_SPACE_RESTRICTOR_INFO") and not ctx.flag("AGR_INVULNERABLE_OFF_INFO") then
+				agr_order_t = agr_order_t or ctx.now
+				if ctx.flag("AGR_SMART_TERRAIN_7_STALKER_MOLE_TALK_TO_THE_STALKER_MOLE_STOP_DIALOG_INFO") or ctx.now - agr_order_t >= 120000 then
+					story_flags.give_flag("AGR_INVULNERABLE_OFF_INFO")
+				end
+			end
 			if not ctx.flag("AGR_STALKER_HELP_1_INFO") then return false end
 			if ctx.flag("AGR_SMART_TERRAIN_7_STALKER_MOLE_TALK_TO_THE_STALKER_MOLE_STOP_DIALOG_INFO") then return false end
 			local inside, total = inside_counts(ctx, AGR.zone)

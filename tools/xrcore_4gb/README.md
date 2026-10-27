@@ -39,8 +39,8 @@ Download `SoC_COOP_4GB_patch.zip` from the release page, close the game, the ded
 
 ### How it works (for developers)
 
-The new code lives in two new sections: `.xpat` (code, read+execute) and `.xpad` (two dwords and a 32 entry table, read+write). Everything is position independent (the DLL uses ASLR).
-Twelve places of the original code are replaced by a `JMP` into `.xpat` plus NOPs; the original bytes are checked before patching, the rest of the file is unchanged.
+The new code lives in two new sections: `.xpat2` (code, read+execute) and `.xpad2` (two dwords and a 128 entry table, read+write). Everything is position independent (the DLL uses ASLR).
+Thirteen places of the original code are replaced by a `JMP` into `.xpat2` plus NOPs; the original bytes are checked before patching, the rest of the file is unchanged.
 
 | Place | Problem | Change |
 |---|---|---|
@@ -49,6 +49,7 @@ Twelve places of the original code are replaced by a `JMP` into `.xpat` plus NOP
 | `LoadArchive` (file list) | `file.ptr64 = entry.ptr + archive.offset` computed in 32 bits, high half hard-coded 0 | 64-bit sum, high half passed to `Register` |
 | `file_from_addon(IReader)` | view end clamped to the low 32 bits of the file size | `GetFileSize(hFile, &high)` and a 64-bit clamp |
 | `CStreamReader::construct/map/remap/advance` | window computed with `u32` start offset and `u32` archive size | a shared routine `calc` for readers found in a table; `file_from_archive(CStreamReader)` registers the reader (start offset high dword, archive size high dword) before `construct`, `destroy` unregisters it |
+| `CStreamReader::open_chunk` | builds the child reader of a chunk inline (not through `construct`), so it kept the 32-bit window code and its map failed once the add-on was larger than 4 GiB (v1.5.0 closed the game while a level loaded) | the child of a registered reader is registered with the parent's high dwords plus the carry of start + offset |
 
 A source level fix in `xray16_xrMPE` is shorter: make `archive::offset` and `archive::size` `u64`, keep the tar position `u64` in `ProcessAddon`, pass `u64` to `ProcessArchive` and
 `open_chunk`, compute `file::ptr64` in 64 bits, and make `CStreamReader::m_start_offset`, `m_file_size` and `m_archive_size` `u64` (`MapViewOfFile` already takes the high dword). `fseek` of a member
@@ -59,7 +60,7 @@ larger than 2 GiB needs `_fseeki64`.
 * In the game, on a 5.35 GiB add-on (Shadow of COOP + fix patch + the cut-scene databases, members at 4.2 GiB, straddling 4 GiB and above it, the last one at the end of the file):
   the game loads the level, the engine opens files from the databases above 4 GiB and the bytes read match the source files (26 files compared byte by byte; Russian and English sound,
   standard and Full HD movies), and the Full HD intro movie, streamed from a database that straddles 4 GiB, starts without errors. With the original `xrCore.dll` the same add-on crashes at start.
-* On the real add-on of the v1.5.0 release (4.05 GiB, the movie database straddles 4 GiB): the game loads all four databases, passes the add-on version check and reaches the lobby.
+* On the real add-on of the v1.5.1 release (4.05 GiB, the movie database straddles 4 GiB): the game boots, loads a level (Cordon) and the artifact values read in game come from the new database. (v1.5.0 only reached the lobby and crashed while a level loaded, because the child readers of chunks were not covered: fixed in 1.5.1, found with a small debugger that caught the first access violation.)
 * The machine code of the new routines runs in an emulator against a 64-bit reference (`test/emu_calc_test.py`: 19,702 random readers, 542 of them with a window crossing a 4 GiB multiple;
   `test/emu_register_test.py`: registration, removal, full table) and `test/run_inst_test.py` runs the installer on a synthetic 4.4 GB add-on (refusal without the patch, automatic patch,
   byte-identical members above 4 GiB, languages, uninstall).
