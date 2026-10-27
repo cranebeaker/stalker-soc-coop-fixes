@@ -9,6 +9,28 @@ unlocks the true ending.
 This is a fan patch. It is not made by or affiliated with the Shadow of COOP or xrMPE teams.
 You need their launcher and add-on first.
 
+## Latest version: 1.5.0 (use this one)
+
+Download **`SoC_COOP_fixes_v1.5.0.zip`** from [Releases](../../releases), unzip it, close the game and the xrMPE launcher, and double-click
+`installer\install.bat`. It adds the fixes and the original cut-scene movies to your `coop.addon` (the same way on every PC, so everybody gets the same add-on
+fingerprint) and copies the movie sound of your language (Russian or English) to `game\patches`. Every player, the host and a dedicated server PC install it the same way.
+
+The movies make the add-on larger than 4 GiB, which the 32-bit game engine could not load. The release therefore also carries a fix for one engine file
+(`game\bin\xrCore.dll`), made with the OK of the xrMPE team; `install.bat` applies it for you. The fix is also a download of its own,
+**`SoC_COOP_4GB_patch.zip`**, for anyone who just wants add-ons larger than 4 GiB. How it works and how it was tested: [tools/xrcore_4gb](tools/xrcore_4gb/README.md).
+
+Language: the movie sound language is chosen when you install (from `voice_language` in your `coop_settings.ltx`, else the launcher language;
+`install.bat -Voice rus` or `-Voice eng` to force one). Scripted voice lines follow `voice_language` in the `[client]` section of `coop_settings.ltx` (`auto`, `rus`, `eng`).
+
+**Русский.** Скачайте **`SoC_COOP_fixes_v1.5.0.zip`** из [Releases](../../releases), распакуйте, закройте игру и лаунчер xrMPE и запустите `installer\install.bat`.
+Он добавит исправления и оригинальные ролики в ваш `coop.addon` (одинаково на всех ПК, чтобы у всех был один отпечаток аддона) и скопирует звук роликов вашего языка
+(русский или английский) в `game\patches`. Ставят все: каждый игрок, хост и ПК с выделенным сервером.
+Ролики делают аддон больше 4 ГиБ, а 32-битный движок такое не загружал, поэтому в релизе есть и исправление одного файла движка (`game\bin\xrCore.dll`),
+сделанное с разрешения команды xrMPE; `install.bat` ставит его сам. Исправление есть и отдельной загрузкой, **`SoC_COOP_4GB_patch.zip`**, для тех, кому нужны просто аддоны больше 4 ГиБ.
+Язык звука роликов выбирается при установке (по `voice_language` в `coop_settings.ltx`, иначе по языку лаунчера; `-Voice rus` или `-Voice eng` чтобы задать вручную).
+
+The older steps below are for the first versions (1.0 to 1.3).
+
 ## Play in three steps
 
 1. Install the [xrMPE launcher](https://github.com/M4dMurloc/xrMPE_Launcher_Release/releases)
