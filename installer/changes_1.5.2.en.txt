@@ -1,0 +1,5 @@
+﻿New in v1.5.2
+
+- @installer: One download, one file to run: the Full HD cut-scene movies (movies by neatodev, Nexus mod 1098) are inside the add-on now, installed by install.bat together with the fixes, the standard movies and the engine patch. No separate Full HD pack to download any more; an old separate pack in game\patches is removed by the installer. install.bat -NoHD leaves them out (everybody must use the same options). The add-on grows by about 1.4 GB
+- Includes everything of v1.5.1: the engine patch fix (v1.5.0 could close the game while a level loads), the fixes of v1.4.4 to v1.4.7, the original SoC artifact stats, Agroprom soldiers no longer immortal
+- Saves of v1.5.1 and earlier keep working

@@ -4,17 +4,19 @@
 # coop.addon different and the server reports "Different Versions".)
 #
 # Since v1.5 the original movies of the cut-scenes (zz_soc_cutscenes.db) go into coop.addon too, so the add-on is larger than 4 GiB.
+# Since v1.5.2 the Full HD movies (zz_soc_cutscenes_hd.db, about 1.4 GB, movies by neatodev) go in as well; -NoHD leaves them out.
 # The 32-bit engine can only load that with the patched xrCore.dll (folder xrcore_4gb); this installer applies it when needed.
 # The movie SOUND stays a personal choice: the sound file of your language is copied to game\patches (see -Voice).
 #
 # Usage: install.bat (zip layout: zzz_soc_coop_fixes.db and cutscenes\ next to the installer folder).
-#        install.bat -Addon "D:\...\coop.addon"      install.bat -Voice rus|eng|none      install.bat -NoCutscenes
+#        install.bat -Addon "D:\...\coop.addon"      install.bat -Voice rus|eng|none      install.bat -NoCutscenes      install.bat -NoHD
 #        install.bat -NoEnginePatch (never touch xrCore.dll; refuses when the add-on would pass 4 GiB)      install.bat -Uninstall
 param(
     [string]$Addon = "",
     [string]$Db = "",
     [string]$Voice = "auto",
     [switch]$NoCutscenes,
+    [switch]$NoHD,
     [switch]$NoEnginePatch,
     [switch]$Uninstall
 )
@@ -22,6 +24,7 @@ $ErrorActionPreference = "Stop"
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
 $PatchName = "zzz_soc_coop_fixes.db"
 $MoviesName = "zz_soc_cutscenes.db"
+$HdName = "zz_soc_cutscenes_hd.db"
 $VoiceNames = @{ rus = "zz_soc_cutscenes_voice_rus.db"; eng = "zz_soc_cutscenes_voice_eng.db" }
 $BaseNames = @("gamedata.db0", "gamedata.db1", "icon.webp", "metadata.json")
 $Here = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -131,6 +134,8 @@ if (-not $Uninstall) {
         $cut = Join-Path (Split-Path -Parent $Db) "cutscenes"
         $mv = Join-Path $cut $MoviesName
         if (Test-Path -LiteralPath $mv) { $Members += , @($MoviesName, $mv) }
+        $hd = Join-Path $cut $HdName
+        if (-not $NoHD -and (Test-Path -LiteralPath $hd)) { $Members += , @($HdName, $hd) }
         else { Write-Host "Cut-scene movies ($MoviesName) not found next to the patch, installing the fixes only. / Ролики ($MoviesName) не найдены, ставлю только исправления." -ForegroundColor Yellow }
     }
 }
@@ -255,6 +260,11 @@ $patches = Join-Path $GameDir "patches"
 if (-not $Uninstall -and ($Members | Where-Object { $_[0] -eq $MoviesName })) {
     $old = Join-Path $patches $MoviesName
     if (Test-Path -LiteralPath $old) { Remove-Item -LiteralPath $old -Force; Write-Host "Removed the old copy of the movies from patches\ / Удалена старая копия роликов из patches\" }
+}
+# Same for the Full HD pack of v1.4.3 (zz_soc_cutscenes_hd.db in game\patches) when the HD movies are inside the add-on now.
+if (-not $Uninstall -and ($Members | Where-Object { $_[0] -eq $HdName })) {
+    $oldhd = Join-Path $patches $HdName
+    if (Test-Path -LiteralPath $oldhd) { Remove-Item -LiteralPath $oldhd -Force; Write-Host "Removed the old Full HD pack from patches\ (it is inside the add-on now) / Удалён старый пакет Full HD из patches\ (теперь он в аддоне)" }
 }
 # Movie sound: one language per player, a file in game\patches (it does not change the add-on, so players may differ).
 if ($Uninstall) {

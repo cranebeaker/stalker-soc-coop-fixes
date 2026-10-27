@@ -55,14 +55,14 @@ Install (every player, the host and a dedicated server PC, all the same way)
    writes the fixes and the movies into coop.addon and copies your movie sound language.
 4. The last line shows the add-on fingerprint. It must be the same for every player, otherwise the server says "Different Versions".
    (Same options for everybody: do not mix -NoCutscenes with the default install.)
-An older fix patch (1.4.x) is replaced by running install.bat again. The Full HD movies are optional and per player, see below.
+An older fix patch (1.4.x) is replaced by running install.bat again. The Full HD movies are inside, see below.
 
-Options of install.bat: -Addon "D:\\...\\coop.addon", -Voice auto|rus|eng|none, -NoCutscenes (fixes only, as before 1.5, add-on stays below 4 GiB),
+Options of install.bat: -NoHD, -Addon "D:\\...\\coop.addon", -Voice auto|rus|eng|none, -NoCutscenes (fixes only, as before 1.5, add-on stays below 4 GiB),
 -NoEnginePatch (never touch xrCore.dll; refuses when the add-on would pass 4 GiB), -Uninstall.
 Uninstall: installer\\install.bat -Uninstall removes the fixes and the movies. The engine patch is separate: xrcore_4gb\\install_xrcore_patch.bat -Uninstall.
 
-Full HD movies (optional, 1.4 GB, per player): the pack from the v1.4.3 release (SoC_COOP_cutscene_pack.zip, movies by neatodev, Nexus mod 1098) still works
-next to this version. Run its install_cutscenes.bat; it needs no engine patch because the files stay in game\\patches.
+Full HD movies (movies by neatodev, Nexus mod 1098) are inside the add-on, nothing else to download. If you installed the separate Full HD pack of v1.4.3 before,
+install.bat removes its copy from game\patches. install.bat -NoHD leaves the Full HD movies out (the add-on is then about 1.4 GB smaller; everybody must use the same options).
 
 If something goes wrong
 - The game closes right after the start: this PC has no patched xrCore.dll. Run xrcore_4gb\\install_xrcore_patch.bat (or install.bat again).
@@ -97,14 +97,14 @@ README_RU = """Shadow of COOP: неофициальный патч исправ�
    запишет исправления и ролики в coop.addon и скопирует звук ваших роликов.
 4. В последней строке будет отпечаток аддона. Он должен совпадать у всех игроков, иначе сервер скажет "Different Versions".
    (У всех одинаковые параметры: не смешивайте -NoCutscenes и обычную установку.)
-Старый патч исправлений (1.4.x) заменяется повторным запуском install.bat. Ролики Full HD по желанию и у каждого свои, см. ниже.
+Старый патч исправлений (1.4.x) заменяется повторным запуском install.bat. Ролики Full HD уже внутри, см. ниже.
 
-Параметры install.bat: -Addon "D:\\...\\coop.addon", -Voice auto|rus|eng|none, -NoCutscenes (только исправления, как до 1.5, аддон остаётся меньше 4 ГиБ),
+Параметры install.bat: -NoHD, -Addon "D:\\...\\coop.addon", -Voice auto|rus|eng|none, -NoCutscenes (только исправления, как до 1.5, аддон остаётся меньше 4 ГиБ),
 -NoEnginePatch (не трогать xrCore.dll; откажется, если аддон станет больше 4 ГиБ), -Uninstall.
 Удаление: installer\\install.bat -Uninstall убирает исправления и ролики. Патч движка отдельно: xrcore_4gb\\install_xrcore_patch.bat -Uninstall.
 
-Ролики Full HD (по желанию, 1,4 ГБ, у каждого свои): пакет из релиза v1.4.3 (SoC_COOP_cutscene_pack.zip, ролики neatodev, Nexus мод 1098) работает вместе с этой версией.
-Запустите его install_cutscenes.bat; патч движка ему не нужен, файлы остаются в game\\patches.
+Ролики Full HD (ролики neatodev, Nexus мод 1098) уже внутри аддона, ничего больше скачивать не нужно. Если раньше стоял отдельный пакет Full HD из v1.4.3,
+install.bat удалит его копию из game\patches. install.bat -NoHD ставит без роликов Full HD (аддон меньше примерно на 1,4 ГБ; у всех игроков параметры должны быть одинаковыми).
 
 Если что-то не так
 - Игра закрывается сразу после запуска: на этом ПК нет пропатченного xrCore.dll. Запустите xrcore_4gb\\install_xrcore_patch.bat (или снова install.bat).
@@ -173,7 +173,7 @@ def main():
     work = os.path.join(out, "_work")
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(work)
-    for p in (a.xrcore_orig, a.db) + tuple(os.path.join(a.cutscenes, n) for n in ("zz_soc_cutscenes.db", "zz_soc_cutscenes_voice_rus.db", "zz_soc_cutscenes_voice_eng.db")):
+    for p in (a.xrcore_orig, a.db) + tuple(os.path.join(a.cutscenes, n) for n in ("zz_soc_cutscenes.db", "zz_soc_cutscenes_hd.db", "zz_soc_cutscenes_voice_rus.db", "zz_soc_cutscenes_voice_eng.db")):
         if not os.path.isfile(p):
             raise SystemExit("missing: " + p)
     # the engine patch: build the patched DLL (never shipped), make the stand-alone installer from the byte changes
@@ -188,7 +188,7 @@ def main():
     for d in ("installer", "cutscenes", "xrcore_4gb"):
         os.makedirs(os.path.join(stage, d))
     shutil.copyfile(a.db, os.path.join(stage, "zzz_soc_coop_fixes.db"))
-    for n in ("zz_soc_cutscenes.db", "zz_soc_cutscenes_voice_rus.db", "zz_soc_cutscenes_voice_eng.db"):
+    for n in ("zz_soc_cutscenes.db", "zz_soc_cutscenes_hd.db", "zz_soc_cutscenes_voice_rus.db", "zz_soc_cutscenes_voice_eng.db"):
         shutil.copyfile(os.path.join(a.cutscenes, n), os.path.join(stage, "cutscenes", n))
     shutil.copyfile(os.path.join(REPO, "installer", "install.ps1"), os.path.join(stage, "installer", "install.ps1"))
     open(os.path.join(stage, "installer", "install.bat"), "wb").write(
@@ -234,7 +234,7 @@ def main():
     for folder, zname in ((stage, name + ".zip"), (pstage, "SoC_COOP_4GB_patch.zip")):
         zp = os.path.join(out, zname)
         base = os.path.basename(folder)
-        with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+        with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
             for dp, dn, fns in sorted(os.walk(folder)):
                 for fn in sorted(fns):
                     p = os.path.join(dp, fn)
