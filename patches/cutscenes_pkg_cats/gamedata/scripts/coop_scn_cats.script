@@ -22,6 +22,12 @@
 -- section when the scene is over (scene_played, or START_ARENA_GO for the repeatable arena).
 -------------------------------------------------------------------------------------------------------
 
+-- v1.5.4: the three director scenes below are SWITCHED OFF (CAMERA_SCENES = false). With a real second player the Agroprom scene (order to kill the
+-- stalker Mole) left both players frozen with the UI off, and then the game closed; the director was only ever tested with one client. Agroprom and
+-- Rostok are back on the camera logic of the mod itself (each player plays the flight; the restrictor ltx overrides of this package are in wip/); the
+-- Bar arena never had an override. The Agroprom soldier invulnerability fallback below stays.
+local CAMERA_SCENES = false
+
 -- is any / which share of the alive players inside the restrictor object `zname` (db.zone_by_name)
 local function inside_counts(ctx, zname)
 	local z = db.zone_by_name and db.zone_by_name[zname]
@@ -112,6 +118,7 @@ coop_scenes.register{
 					story_flags.give_flag("AGR_INVULNERABLE_OFF_INFO")
 				end
 			end
+			if not CAMERA_SCENES then return false end
 			if not ctx.flag("AGR_STALKER_HELP_1_INFO") then return false end
 			if ctx.flag("AGR_SMART_TERRAIN_7_STALKER_MOLE_TALK_TO_THE_STALKER_MOLE_STOP_DIALOG_INFO") then return false end
 			local inside, total = inside_counts(ctx, AGR.zone)
@@ -142,6 +149,7 @@ coop_scenes.register{
 	cam = { anm = BAR.anm, id = 9102, global = true },
 	trigger = function(ctx)
 		local ok, res = pcall(function()
+			if not CAMERA_SCENES then return false end
 			if not ctx.flag("BAR_ARNY_ARENA_SMART_TERRAIN_START_CAT_SCENE_INFO") then return false end
 			if ctx.flag("BAR_ARNY_ARENA_SMART_TERRAIN_START_ARENA_GO") then return false end
 			local inside, total = inside_counts(ctx, BAR.zone)
@@ -170,6 +178,7 @@ coop_scenes.register{
 	cam = { anm = ROS.anm, id = 9103, global = true },
 	trigger = function(ctx)
 		local ok, res = pcall(function()
+			if not CAMERA_SCENES then return false end
 			if not ctx.flag("ROS_SNIPER_SPACE_RESTRICTOR_INFO") then return false end
 			if ctx.flag("ROS_START_GO_TO_YANTAR_QUEST_TASK_INFO") then return false end
 			local inside, total = inside_counts(ctx, ROS.zone)

@@ -1,0 +1,5 @@
+﻿New in v1.5.4
+
+- @cutscenes_pkg_cats: Fixes the freeze at the start of the Agroprom task "Save the stalker Mole": with two real players the shared camera scene left both players frozen with the UI off, and the game could close. The three shared camera scenes of this pack (Agroprom, Rostok, Bar arena) are switched off; Agroprom and Rostok play the original camera flight of the mod again (each player sees it for themselves). The Agroprom soldiers still stop being invulnerable on their own
+- Everybody has to install v1.5.4 (the add-on fingerprint changes). Includes everything of v1.5.3
+- Saves of v1.5.3 and earlier keep working
