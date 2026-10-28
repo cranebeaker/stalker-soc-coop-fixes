@@ -1,0 +1,5 @@
+﻿New in v1.5.3
+
+- @installer: Fixes "Different Versions" between players who all installed the same release. The launcher (and different builds of the mod) write the four original files of coop.addon with different tar headers (owner, mode, date) on different PCs; the file contents are the same, but the add-on checksum was not. install.bat now rewrites those four headers to one fixed form (file contents are not touched), so every player ends with the same fingerprint. Everybody has to install v1.5.3 (the fingerprint of v1.5.2 differs)
+- Includes everything of v1.5.2 (Full HD movies inside, one install.bat) and v1.5.1 (engine patch fix, original SoC artifact stats, Agroprom soldiers no longer immortal)
+- Saves of v1.5.2 and earlier keep working

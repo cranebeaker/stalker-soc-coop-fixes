@@ -5,6 +5,7 @@
 #
 # Since v1.5 the original movies of the cut-scenes (zz_soc_cutscenes.db) go into coop.addon too, so the add-on is larger than 4 GiB.
 # Since v1.5.2 the Full HD movies (zz_soc_cutscenes_hd.db, about 1.4 GB, movies by neatodev) go in as well; -NoHD leaves them out.
+# Since v1.5.3 the four original entries of coop.addon get the same tar header on every PC (the launcher writes them differently on different PCs, which changed the fingerprint).
 # The 32-bit engine can only load that with the patched xrCore.dll (folder xrcore_4gb); this installer applies it when needed.
 # The movie SOUND stays a personal choice: the sound file of your language is copied to game\patches (see -Voice).
 #
@@ -70,6 +71,22 @@ function Read-Octal([byte[]]$h, [int]$off, [int]$len) {
 function Write-Field([byte[]]$h, [int]$off, [string]$s) {
     $b = [System.Text.Encoding]::ASCII.GetBytes($s)
     [Array]::Copy($b, 0, $h, $off, $b.Length)
+}
+
+# The one tar header this installer writes (mode 0644, uid/gid 0, mtime 0, no names): the same bytes on every PC.
+function New-TarHeader([string]$name, [long]$len) {
+    $hdr = New-Object byte[] 512
+    Write-Field $hdr 0 $name
+    Write-Field $hdr 100 "0000644`0"                                   # mode
+    Write-Field $hdr 108 "0000000`0"                                   # uid
+    Write-Field $hdr 116 "0000000`0"                                   # gid
+    Write-Field $hdr 124 ([Convert]::ToString([long]$len, 8).PadLeft(11, '0') + "`0")
+    Write-Field $hdr 136 "00000000000`0"                               # mtime 0: same on every PC
+    Write-Field $hdr 156 "0"                                           # regular file
+    for ($i = 148; $i -lt 156; $i++) { $hdr[$i] = 32 }
+    $sum = 0; foreach ($x in $hdr) { $sum += $x }
+    Write-Field $hdr 148 ([Convert]::ToString($sum, 8).PadLeft(6, '0') + "`0 ")
+    return ,$hdr
 }
 
 # True when game\bin\xrCore.dll carries the 4 GiB patch (a section named .xpat2, see xrcore_4gb\README.md).
@@ -176,13 +193,17 @@ try {
     }
     if ($cut -lt 0) { $cut = $pos }
     $seen = @()
+    $baseHdr = @()
     $fs.Position = 0
     $p2 = [long]0
     while ($p2 -lt $cut) {
         $fs.Position = $p2; [void]$fs.Read($h, 0, 512)
         $nameEnd = [Array]::IndexOf($h, [byte]0); if ($nameEnd -lt 0 -or $nameEnd -gt 100) { $nameEnd = 100 }
-        $seen += [System.Text.Encoding]::ASCII.GetString($h, 0, $nameEnd)
-        $p2 += 512 + [long]([Math]::Ceiling((Read-Octal $h 124 12) / 512.0) * 512)
+        $bn = [System.Text.Encoding]::ASCII.GetString($h, 0, $nameEnd)
+        $bs = Read-Octal $h 124 12
+        $seen += $bn
+        $baseHdr += , @($p2, $bn, $bs)
+        $p2 += 512 + [long]([Math]::Ceiling($bs / 512.0) * 512)
     }
     foreach ($b in $BaseNames) { if ($seen -notcontains $b) { throw "This does not look like the Shadow of COOP coop.addon (missing $b)." } }
 
@@ -217,23 +238,18 @@ try {
             }
         }
     }
+    if (-not $Uninstall) {
+        # The launcher / the mod packers write the four original entries with different owner, mode and date fields on different PCs
+        # (same file contents, different header bytes), which made the add-on checksum differ between players. Same header everywhere:
+        foreach ($b in $baseHdr) { $fs.Position = $b[0]; $nh = New-TarHeader $b[1] $b[2]; $fs.Write($nh, 0, 512) }
+    }
     $fs.SetLength($cut)
     $fs.Position = $cut
     if (-not $Uninstall) {
         foreach ($m in $Members) {
             $name = $m[0]
             $len = (Get-Item -LiteralPath $m[1]).Length
-            $hdr = New-Object byte[] 512
-            Write-Field $hdr 0 $name
-            Write-Field $hdr 100 "0000644`0"                                   # mode
-            Write-Field $hdr 108 "0000000`0"                                   # uid
-            Write-Field $hdr 116 "0000000`0"                                   # gid
-            Write-Field $hdr 124 ([Convert]::ToString([long]$len, 8).PadLeft(11, '0') + "`0")
-            Write-Field $hdr 136 "00000000000`0"                               # mtime 0: same on every PC
-            Write-Field $hdr 156 "0"                                           # regular file
-            for ($i = 148; $i -lt 156; $i++) { $hdr[$i] = 32 }
-            $sum = 0; foreach ($x in $hdr) { $sum += $x }
-            Write-Field $hdr 148 ([Convert]::ToString($sum, 8).PadLeft(6, '0') + "`0 ")
+            $hdr = New-TarHeader $name $len
             $fs.Write($hdr, 0, 512)
             $src = [System.IO.File]::Open($m[1], [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::Read)
             try {
