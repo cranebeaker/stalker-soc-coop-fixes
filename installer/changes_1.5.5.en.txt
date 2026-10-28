@@ -1,0 +1,5 @@
+﻿New in v1.5.5
+
+- @english_subtitles: English subtitles for the story voice lines (they are recorded in Russian only): the speech of NPCs shows as a PDA news tip with the text, and the lines that play as the player's own sound (PDA calls such as Mole's, radio) now show it too, which the original game never did. About 280 lines (Cordon to Pripyat), machine translated from a speech transcript, so the wording can be off. Not covered: the helicopter battle radio of the Military level, mutant and effect sounds, generic stalker chatter
+- Includes v1.5.4: the three shared camera scenes (Agroprom, Rostok, Bar arena) are switched off because the Agroprom one froze two players at the start of "Save the stalker Mole"; Agroprom and Rostok play the mod's own camera flight again
+- Everybody has to install v1.5.5 (the add-on fingerprint changes). Saves of v1.5.3 and earlier keep working

@@ -1,0 +1,62 @@
+-------------------------------------------------------------------------------------------------------
+-- English subtitles for the story voice lines of the mod (they are recorded in Russian only).
+--
+-- The game already knows a "subtitle": when a scripted NPC speaks (npc_sound:play in sound_theme.script) it looks for a string
+-- table entry named like the sound file, "\" replaced by "_", and shows a PDA news tip with that text. The strings are in
+-- configs/text/eng/z_soc_subtitles.xml (tools/gen_subtitles.py).
+-- What the game does NOT do: lines that play as the player's own sound (type = actor: PDA voice of Mole, the radio of the helicopter)
+-- call news_manager.send_sound with no NPC and no faction, which shows nothing. This wrapper shows those lines too.
+-- Installed from the bootstrap of xr_conditions.dscript (cutscenes_core), on every machine. When news_manager is not ready yet at that
+-- moment the install is retried once a second from a level callback (at most 60 tries).
+-------------------------------------------------------------------------------------------------------
+
+local wrapped = false
+local retrying = false
+
+local function show_actor_line(snd)
+	local txt = string.gsub(snd, "\\", "_")
+	local text = game.translate_string(txt)
+	if text == txt then return end
+	local actor = db.actor
+	if actor == nil then return end
+	actor:give_game_news(game.translate_string("st_tip"), text, "ui_iconsTotal_grouping", 1000, 5000, 1)
+end
+
+local function try_wrap()
+	if wrapped then return true end
+	local orig = news_manager.send_sound
+	if orig == nil then return false end
+	news_manager.send_sound = function(npc, faction, point, str, str2, delay_sound)
+		if npc == nil and faction == nil and str ~= nil then
+			pcall(show_actor_line, str)
+		end
+		return orig(npc, faction, point, str, str2, delay_sound)
+	end
+	wrapped = true
+	return true
+end
+
+function install()
+	if wrapped then return end
+	local ok = pcall(try_wrap)
+	if ok and wrapped then return end
+	if retrying then return end
+	retrying = true
+	local tries, last = 0, 0
+	pcall(function()
+		level.add_call(function()
+			if wrapped then return true end
+			local now = time_global()
+			if now - last < 1000 then return false end
+			last = now
+			tries = tries + 1
+			pcall(try_wrap)
+			if wrapped then return true end
+			if tries >= 60 then
+				printf_msg("[coop_subtitles] could not install after %d tries", tries)
+				return true
+			end
+			return false
+		end, function() end)
+	end)
+end

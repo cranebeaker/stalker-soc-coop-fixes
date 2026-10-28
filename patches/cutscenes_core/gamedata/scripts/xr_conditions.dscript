@@ -377,6 +377,7 @@ function scene_active(actor, npc, p)
 end
 
 pcall(function() coop_scenes.install() end)
+pcall(function() coop_subtitles.install() end)    -- English subtitles for the story voice lines (patches/english_subtitles)
 
 -- false while a scripted voice scene of this NPC plays on this client (talking then would overlap two recordings)
 function coop_sidor_talk_ok(actor, npc)
