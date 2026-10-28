@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<window>
+	<lobby_wnd anchor="fullscreen" stretch="1">
+		<auto_static x="0" y="0" width="701" height="1080" stretch="1">
+			<texture>ui_left_grad_big</texture>
+		</auto_static>	
+		
+		<level_info x="60" y="60" width="647" height="72" stretch="1">
+			<texture>ui_lobby_left_grad_panel</texture>	
+			<text x="18" y="6" font="din_next28_bold" align="l"/>		
+			
+			<game_type_icon x="18" y="41" width="22" height="22" stretch="1"/>
+			<game_type_info x="50" y="39" width="275" height="35">
+				<text font="din_next20_bold" color="yellow_mpe" align="l">st_cooperative</text>
+			</game_type_info>		
+		</level_info>
+		
+		<auto_text x="80" y="162" width="540" height="115">
+			<text font="din_next16" align="l" outline="1" complex_mode="1">st_coop_desc</text>
+		</auto_text>
+		
+		<min_players_message anchor="bot-right" x="60" y="142" width="452" height="42" light_anim="ui_btn_hint_fast" la_cyclic="0" la_alpha="1">
+			<lineview x="15" anchor="mid-right" height="42" items_indent="8">
+				<value_text height="30">
+					<text y="-1" font="din_next28_bold" vert_align="c" outline="1"/>
+				</value_text>			
+				<message_text height="30">
+					<text y="3" font="din_next17_bold" vert_align="c" outline="1" color="light_gray_mpe"/>
+				</message_text>
+			</lineview>
+			
+			<auto_static x="0" y="0" width="452" height="42" stretch="1">
+				<texture>ui_lobby_right_grad_message_red</texture>
+			</auto_static>				
+			
+			<auto_static anchor="mid-right" x="380" y="0" width="40" height="40" stretch="1">
+				<texture>ui_lobby_warning_red_icon</texture>
+			</auto_static>		
+		</min_players_message>
+		
+		<start_timer_message anchor="bot-right" x="60" y="142" width="452" height="42" light_anim="ui_btn_hint_fast" la_cyclic="0" la_alpha="1">
+			<lineview x="15" anchor="mid-right" height="42" items_indent="8">
+				<value_text height="30">
+					<text y="-1" font="din_next28_bold" vert_align="c" outline="1">0</text>
+				</value_text>			
+				<message_text height="30">
+					<text y="3" font="din_next17_bold" vert_align="c" outline="1">mp_lobby_time_to_start</text>
+				</message_text>
+			</lineview>
+			
+			<auto_static x="0" y="0" width="452" height="42" stretch="1">
+				<texture>ui_lobby_right_grad_message_yellow</texture>
+			</auto_static>				
+			
+			<auto_static anchor="mid-right" x="380" y="0" width="40" height="40" stretch="1">
+				<texture>ui_lobby_time_yellow_icon</texture>
+			</auto_static>		
+		</start_timer_message>	
+
+		<start_button anchor="bot-right" x="60" y="60" width="439" height="72" stretch="1">
+			<texture>ui_lobby_start_btn</texture>
+			<text x="-15" y="12" font="din_next28_bold" align="r"/>
+			<ready_txt>st_mp_ready</ready_txt>	
+			<not_ready_txt>st_mp_not_ready</not_ready_txt>				
+			<text_color>
+				<e color="ui_white"/>
+				<t color="ui_white"/>
+				<d color="dark_gray_mpe"/>
+				<h color="ui_white"/>
+			</text_color>
+			<sound_h>interface\selector_button</sound_h>
+			<sound_t>interface\lobby_button</sound_t>			
+			<sound_c>interface\cancel_button</sound_c>
+
+			<players_counter anchor="mid-right" x="15" y="-18" width="140" height="20">
+				<text font="din_next17_bold" align="r" color="light_gray_mpe"/>
+			</players_counter>
+		</start_button>
+		
+		<lobby_members y="192" anchor="bot-center" height="185" items_indent="48">
+			<member width="122" height="185"/>
+		</lobby_members>
+		
+		<sub_menu x="60" y="274" width="300" height="182">
+			<auto_text x="0" y="0" width="150" height="28">
+				<text font="din_next17" color="gray_mpe" vert_align="c" align="l">mm_mp_lobby</text>
+			</auto_text>		
+
+			<auto_static x="0" y="26" width="330" height="2" stretch="1">
+				<texture>ui_lobby_left_fade_line_medium</texture>
+			</auto_static>
+
+			<character_btn x="18" y="37" width="320" height="42" stretch="1">
+				<texture>ui_ingame_left_fade_button</texture>
+				<text x="15" font="din_next20_bold" align="l">mp_lobby_character</text>
+				<text_color>
+					<e color="gray_mpe"/>
+					<t color="ui_white"/>
+					<d color="dark_gray_mpe"/>
+					<h color="ui_white"/>
+				</text_color>
+				<sound_h>interface\selector_button</sound_h>
+				<sound_t>interface\select_button</sound_t>					
+			</character_btn>
+
+			<voting_btn x="18" y="83" width="320" height="42" stretch="1">
+				<texture>ui_ingame_left_fade_button</texture>
+				<text x="15" font="din_next20_bold" align="l">mp_voting</text>
+				<text_color>
+					<e color="gray_mpe"/>
+					<t color="ui_white"/>
+					<d color="dark_gray_mpe"/>
+					<h color="ui_white"/>
+				</text_color>
+				<sound_h>interface\selector_button</sound_h>
+				<sound_t>interface\select_button</sound_t>					
+			</voting_btn>
+
+			<menu_btn x="0" y="140" width="320" height="42" stretch="1">
+				<texture>ui_ingame_left_fade_button</texture>
+				<text x="15" font="din_next20_bold" align="l">ui_lobby_to_menu</text>
+				<text_color>
+					<e color="gray_mpe"/>
+					<t color="ui_white"/>
+					<d color="dark_gray_mpe"/>
+					<h color="ui_white"/>
+				</text_color>
+				<sound_h>interface\selector_button</sound_h>
+				<sound_t>interface\select_button</sound_t>					
+			</menu_btn>
+		</sub_menu>
+		
+		<character_menu x="58" y="274" width="524" height="345">
+			<auto_text x="2" y="0" width="150" height="28">
+				<text font="din_next17" color="gray_mpe" vert_align="c" align="l">mp_lobby_character</text>
+			</auto_text>		
+			
+			<auto_static x="2" y="26" width="330" height="2" stretch="1">
+				<texture>ui_lobby_left_fade_line_medium</texture>
+			</auto_static>
+
+			<skin_selector x="0" y="38" width="524" height="250" right_ident="20"
+				scroll_profile="no_arrows_no_outline"
+				always_show_scroll="0"
+				scroll_bar_left="1"
+				column_count="3"
+				column_interval="6"
+				vert_interval="6"
+				can_select="1"
+			>
+				<item width="122" height="122" stretch="1">
+					<image anchor="mid-center" width="116" height="116" stretch="1"/>
+					<unique_character_icon anchor="top-right" x="6" y="6" width="24" height="24" hint="st_character_hint" stretch="1">
+						<texture>ui_lobby_unique_character_icon</texture>
+					</unique_character_icon>
+					<texture>ui_skin_selector_item_btn</texture>
+					<sound_h>interface\selector_button</sound_h>
+					<sound_t>interface\select_button</sound_t>					
+				</item>	
+			</skin_selector>
+
+			<back_btn x="2" y="302" width="320" height="42" stretch="1">
+				<texture>ui_ingame_left_fade_button</texture>
+				<text x="15" font="din_next20_bold" align="l">ui_mm_back</text>
+				<text_color>
+					<e color="gray_mpe"/>
+					<t color="ui_white"/>
+					<d color="dark_gray_mpe"/>
+					<h color="ui_white"/>
+				</text_color>
+				<sound_h>interface\selector_button</sound_h>
+				<sound_t>interface\select_button</sound_t>					
+			</back_btn>			
+		</character_menu>		
+	</lobby_wnd>
+	
+	<chat anchor="top-right" x="58" y="162" width="412" height="315">	
+		<log anchor="bot-left" x="0" y="49" width="412" height="262" right_ident="20" scroll_profile="no_arrows_no_outline" always_show_scroll="0" scroll_bar_left="1" inverse_dir="1">
+			<items_font font="din_next16" />
+		</log>
+		<edit_box anchor="bot-left" x="2" y="0" width="412" height="34" max_symb_count="120">
+			<text x="12" width="394" font="din_next16" vert_align="c" align="l"/>
+	        <texture>ui_mainmenu_edit_box</texture>
+		</edit_box>
+		<edit_box_hint_btn anchor="bot-left" x="2" y="0" width="412" height="34">
+			<text width="394" font="din_next17_bold" vert_align="c" align="l">mp_press_to_chat</text>
+			<text_color>
+				<e color="gray_mpe"/>
+				<t color="ui_white"/>
+				<d color="dark_gray_mpe"/>
+				<h color="ui_white"/>
+			</text_color>
+			<sound_h>interface\ui_aim_button</sound_h>
+			<sound_t>interface\select_button</sound_t>
+		</edit_box_hint_btn>		
+	</chat>
+	
+	<player>
+		<voice_icon anchor="bot-center" x="0" y="163" width="22" height="22" stretch="1" frames="2" duration="1000" columns="2" frame_width="22" frame_height="22" cyclic="1" autoplay="1">
+			<texture>ui\ui_member_voice_anim_medium</texture>
+		</voice_icon>	
+	
+		<name anchor="bot-left" x="0" y="129" width="122" height="35">
+			<text font="din_next14_bold" align="c" vert_align="c" outline="1"/>
+		</name>
+		<empty_header anchor="bot-left" x="0" y="129" width="122" height="35">
+			<text font="din_next14_bold" color="dark_gray_mpe" align="c" vert_align="c" outline="1">mp_empty_lobby_slot</text>
+		</empty_header>
+		
+		<avatar anchor="bot-center" x="0" y="3" width="116" height="116" stretch="1">
+			<texture>ui_skin_selector_item_btn_d</texture>
+		</avatar>
+		
+		<default_frame anchor="bot-left" x="0" y="0" width="122" height="122" stretch="1">
+			<texture>ui_skin_selector_item_btn_d</texture>
+		</default_frame>
+		<ready_frame anchor="bot-left" x="0" y="0" width="122" height="122" stretch="1">
+			<texture>ui_player_avatar_ready_frame</texture>
+		</ready_frame>		
+	</player>
+</window>
+
