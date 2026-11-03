@@ -17,3 +17,10 @@ game (Marked One, Sidorovich, Wolf, Duty, Freedom ...). Generated with `tools/ge
 
 ## Not covered
 Mutant/effect sounds (no speech), the generic stalker chatter (`human_0x/.../states`), the dialog window voices (their text is shown in the dialog already).
+
+## Bottom subtitle (2026-11-03)
+The PDA news tip was cut off for long lines and hidden while the UI is off, so every line is now also drawn as a proper subtitle at the bottom centre of the
+screen: static `cs_soc_subtitle` (in `soc_save_message\...\ui_custom_msgs.xml`, anchor bot-center, 900 wide) filled by `coop_subtitles.script`
+(`show_bottom`, called from the `news_manager.send_sound` wrapper for NPC lines and player-sound lines alike). Text is wrapped at 56 characters, two lines per chunk,
+and long lines run as a sequence of chunks timed by length (0.5 s + 0.07 s per character, at least 2.5 s each). A new line replaces the old one. Not shown on the
+dedicated server. Written from static analysis, not yet seen in game: check position, size, outline, and that clients receive the line.

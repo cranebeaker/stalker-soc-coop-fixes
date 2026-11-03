@@ -82,3 +82,12 @@ Crystal 5000 to 1000, and more) and made every `*_restore_speed` 10 to 40 times 
 0.0006 to 0.007). The immunity sections already matched. `tools\restore_soc_artifact_stats.py <original artefacts.ltx> <artefacts_soc.ltx>` sets cost and the five
 restore speeds of each `_soc` section to the original numbers (bytes and encoding of the rest of the file stay). Checked in game: `system_ini()` reads the original numbers.
 Left as they are: `af_rank = 0` and `additional_inventory_weight = 0`, which the original has no line for (same effect).
+
+## Artifact stats checked against original SoC (2026-11-02)
+Every `af_*_soc` twin was compared with the Steam SoC 1.0006 `artefacts.ltx` (cost, weight, the five `*_restore_speed` values and the nine
+`hit_absorbation_sect` values). Cost, weight and restore speeds already matched except the Sea Urchin (radiation -0.03 and bleeding -0.1 in the
+mod, SoC has -0.003 for both). The protection values did not: most twins had every protection set to 0, so the tooltip showed no effect, and
+some carried values that SoC does not have. SoC stores a damage multiplier (1.0 = nothing, 0.95 = 5 % less damage), the CoP engine stores
+protection (0 = nothing, 0.05 = 5 % less damage), so the file now holds protection = 1 - SoC multiplier. 32 values changed (for example Night Star
+bullet protection 0 to 0.05, Spring and Battery 0.3 shock/impact, Blood, Mincer Meat and Soul -0.1 against bullets and blows as in SoC).
+The Night Star radiation line (0.0005, SoC value) is small enough that the tooltip rounds it to +0.

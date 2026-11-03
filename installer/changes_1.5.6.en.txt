@@ -1,0 +1,8 @@
+New in v1.5.6
+
+- @english_subtitles: the English lines are now proper subtitles at the bottom centre of the screen (dark strip, long lines are shown in timed parts), for NPC speech and for the lines that play as the player's own sound (PDA calls such as Mole's, radio). The PDA news tips stay as before
+- @cutscene_watchdog: the three camera scenes (Agroprom flyover, Bar arena, Rostok) can no longer leave a player frozen with the UI off: a scene that has not ended 45 seconds after its start is ended for that player
+- @cordon: the task "Military documents" shows the same text and marker to every player (it follows the shared quest flag only, no longer the inventory of the player who looks at it)
+- @no_mp_items: the protection values of the artifacts are the original Shadow of Chernobyl ones again (many showed no effect at all), and the Sea Urchin has the original radiation and bleeding values
+- The installer accepts a coop.addon that has a third base file (gamedata.db2) instead of refusing with "has icon.webp after an extra file"
+- Everybody has to install v1.5.6 (the add-on fingerprint changes). Saves of v1.5.5 keep working

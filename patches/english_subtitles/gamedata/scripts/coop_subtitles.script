@@ -22,11 +22,91 @@ local function show_actor_line(snd)
 	actor:give_game_news(game.translate_string("st_tip"), text, "ui_iconsTotal_grouping", 1000, 5000, 1)
 end
 
+-- Bottom subtitle (static cs_soc_subtitle of ui_custom_msgs.xml, patch soc_save_message). One window: a new line replaces the old one.
+local SUB = "cs_soc_subtitle"
+local LINE_MAX = 56                -- characters per line: fits a 4:3 screen as well as 16:9
+local sub_session = 0
+local last_text, last_time = nil, 0
+
+local function show_bottom(snd, snd2)
+	if IsDedicatedServer() then return end
+	local text = nil
+	local cands = { snd2, snd and string.gsub(snd, "\\", "_"), snd and string.gsub(string.gsub(snd, "(characters_voice\\human_..\\)([^\\]*)", "%2"), "[\\]([^\\]*)", "_%1") }
+	for i = 1, 3 do
+		local c = cands[i]
+		if c ~= nil and c ~= "" then
+			local t = game.translate_string(c)
+			if t ~= c then text = t break end
+		end
+	end
+	if text == nil then return end
+	local now = time_global()
+	if text == last_text and now - last_time < 2000 then return end
+	last_text, last_time = text, now
+	local hud = get_hud()
+	if hud == nil then return end
+	-- word wrap at LINE_MAX characters, two lines per chunk; the chunks follow each other, each for a time that matches its length
+	local lines, cur = {}, ""
+	for word in string.gmatch(text, "%S+") do
+		if cur ~= "" and string.len(cur) + 1 + string.len(word) > LINE_MAX then
+			lines[#lines + 1] = cur
+			cur = word
+		elseif cur == "" then
+			cur = word
+		else
+			cur = cur .. " " .. word
+		end
+	end
+	if cur ~= "" then lines[#lines + 1] = cur end
+	local chunks, t = {}, 0
+	for i = 1, #lines, 2 do
+		local c = lines[i]
+		if lines[i + 1] ~= nil then c = c .. " " .. lines[i + 1] end   -- the window wraps by its own width; a "\n" is ignored by the engine
+		local secs = 0.5 + 0.07 * string.len(c)
+		if secs < 2.5 then secs = 2.5 end
+		t = t + secs
+		chunks[#chunks + 1] = { text = c, at = t }
+	end
+	if #chunks == 0 then return end
+	sub_session = sub_session + 1
+	local mine = sub_session
+	local started = now
+	local shown = 0
+	local function put(i)
+		local h = get_hud()
+		if h == nil then return end
+		if h:GetCustomStatic(SUB) == nil then h:AddCustomStatic(SUB, true) end
+		local st = h:GetCustomStatic(SUB)
+		if st ~= nil then st:wnd():TextControl():SetText(chunks[i].text) end
+		shown = i
+	end
+	put(1)
+	level.add_call(function()
+		if sub_session ~= mine then return true end
+		local el = (time_global() - started) / 1000
+		-- the chunk that belongs to this moment: the first whose end time is still ahead
+		local want = #chunks + 1
+		for i = 1, #chunks do
+			if el < chunks[i].at then want = i break end
+		end
+		if want > #chunks then return true end
+		if want ~= shown then pcall(put, want) end
+		return false
+	end, function()
+		if sub_session ~= mine then return end
+		local h = get_hud()
+		if h ~= nil and h:GetCustomStatic(SUB) ~= nil then h:RemoveCustomStatic(SUB) end
+	end)
+end
+
 local function try_wrap()
 	if wrapped then return true end
 	local orig = news_manager.send_sound
 	if orig == nil then return false end
 	news_manager.send_sound = function(npc, faction, point, str, str2, delay_sound)
+		if str ~= nil or str2 ~= nil then
+			pcall(show_bottom, str, str2)
+		end
 		if npc == nil and faction == nil and str ~= nil then
 			pcall(show_actor_line, str)
 		end

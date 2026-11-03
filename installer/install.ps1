@@ -181,7 +181,7 @@ try {
         if ($nameEnd -lt 0 -or $nameEnd -gt 100) { $nameEnd = 100 }
         $name = [System.Text.Encoding]::ASCII.GetString($h, 0, $nameEnd)
         $size = Read-Octal $h 124 12
-        if ($BaseNames -contains $name) {
+        if (($BaseNames -contains $name) -or ($name -match '^gamedata\.db\d+$')) {
             if ($cut -ge 0) { throw "coop.addon has '$name' after an extra file; restore your coop.addon backup or re-download the add-on." }
         } elseif ($cut -lt 0) {
             $cut = $pos

@@ -92,6 +92,12 @@
                 <text font="graffiti22"  r="240" g="217" b="182" a="255" align="c">st_autosave</text>
         </autosave>
 
+        <!-- bottom subtitle of the story voice lines (patch english_subtitles, scripts\coop_subtitles.script); no ttl: the script removes it -->
+        <cs_soc_subtitle anchor="bot-center" x="0" y="70" width="900" height="72" complex_mode="1" stretch="1">
+                <texture x="0" y="0" width="900" height="72" a="150">intro\intro_back</texture>
+                <text x="12" y="6" font="din_next23_bold" r="245" g="232" b="205" a="255" align="c" outline="1"/>
+        </cs_soc_subtitle>
+
     <item_used anchor="bot-center" x="0" y="27" width="600" height="15" ttl="3">
 		<text font="din_next14" align="c" outline="1"/>
     </item_used>
