@@ -28,8 +28,10 @@ local LINE_MAX = 56                -- characters per line: fits a 4:3 screen as 
 local sub_session = 0
 local last_text, last_time = nil, 0
 
+local show_text
+
+-- voice line of an NPC or of the player's own sound: the text is the string table entry named like the sound file
 local function show_bottom(snd, snd2)
-	if IsDedicatedServer() then return end
 	local text = nil
 	local cands = { snd2, snd and string.gsub(snd, "\\", "_"), snd and string.gsub(string.gsub(snd, "(characters_voice\\human_..\\)([^\\]*)", "%2"), "[\\]([^\\]*)", "_%1") }
 	for i = 1, 3 do
@@ -40,6 +42,12 @@ local function show_bottom(snd, snd2)
 		end
 	end
 	if text == nil then return end
+	show_text(text)
+end
+
+-- the bottom subtitle itself (also used for the dialog phrases, see try_pda)
+show_text = function(text)
+	if IsDedicatedServer() then return end
 	local now = time_global()
 	if text == last_text and now - last_time < 2000 then return end
 	last_text, last_time = text, now
@@ -116,23 +124,54 @@ local function try_wrap()
 	return true
 end
 
+-- Dialog phrases: the mod's PDA sync (coop_pda_archive_sync) sees every spoken phrase. emit_phrase runs on the player who talks, apply_news on the other
+-- players (news_type 1 = a dialog phrase, caption = the speaker's name); both now also show the phrase as a bottom subtitle.
+local pda_wrapped = false
+
+local function try_pda()
+	if pda_wrapped then return true end
+	local m = coop_pda_archive_sync
+	if m == nil or m.emit_phrase == nil or m.apply_news == nil then return false end
+	local o_apply, o_emit = m.apply_news, m.emit_phrase
+	m.apply_news = function(caption, text, texture, news_type)
+		if news_type == 1 and text ~= nil and text ~= "" then
+			local who = ""
+			if caption ~= nil and caption ~= "" then who = caption .. ": " end
+			pcall(show_text, who .. text)
+		end
+		return o_apply(caption, text, texture, news_type)
+	end
+	m.emit_phrase = function(first_speaker, second_speaker, text_id)
+		pcall(function()
+			if text_id ~= nil and text_id ~= "" then
+				local text = game.translate_string(text_id)
+				if text ~= text_id then show_text(text) end
+			end
+		end)
+		return o_emit(first_speaker, second_speaker, text_id)
+	end
+	pda_wrapped = true
+	return true
+end
+
 function install()
-	if wrapped then return end
-	local ok = pcall(try_wrap)
-	if ok and wrapped then return end
+	pcall(try_wrap)
+	pcall(try_pda)
+	if wrapped and pda_wrapped then return end
 	if retrying then return end
 	retrying = true
 	local tries, last = 0, 0
 	pcall(function()
 		level.add_call(function()
-			if wrapped then return true end
+			if wrapped and pda_wrapped then return true end
 			local now = time_global()
 			if now - last < 1000 then return false end
 			last = now
 			tries = tries + 1
 			pcall(try_wrap)
-			if wrapped then return true end
-			if tries >= 60 then
+			pcall(try_pda)
+			if wrapped and pda_wrapped then return true end
+			if tries >= 120 then
 				printf_msg("[coop_subtitles] could not install after %d tries", tries)
 				return true
 			end

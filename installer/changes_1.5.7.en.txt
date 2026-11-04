@@ -1,0 +1,6 @@
+New in v1.5.7
+
+- @arena_stragglers: the Bar arena fight can no longer hang on the last one or two mutants. With more players the arena squads are bigger (the player scaling stays) and weak bloodsuckers are mostly invisible, so players could kill everything they saw and nothing happened. Now, when at most 2 mutants are left and nobody has died for 60 seconds, they are finished off and the normal end of the fight (teleport out, reward) follows
+- @english_subtitles: the phrases of NPCs in dialogs (Prapor, traders, quest givers) are now bottom subtitles too, for the player who talks and for the other players, not only a PDA news line
+- @no_mp_items: the tooltip of an artifact now has lines for protection against bullets, wounds, blows and explosions, so the original SoC values (a few percent on many artifacts) can be seen
+- Everybody has to install v1.5.7 (the add-on fingerprint changes). Saves of v1.5.6 keep working

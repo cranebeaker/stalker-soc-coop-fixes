@@ -24,3 +24,9 @@ screen: static `cs_soc_subtitle` (in `soc_save_message\...\ui_custom_msgs.xml`, 
 (`show_bottom`, called from the `news_manager.send_sound` wrapper for NPC lines and player-sound lines alike). Text is wrapped at 56 characters, two lines per chunk,
 and long lines run as a sequence of chunks timed by length (0.5 s + 0.07 s per character, at least 2.5 s each). A new line replaces the old one. Not shown on the
 dedicated server. Written from static analysis, not yet seen in game: check position, size, outline, and that clients receive the line.
+
+## Dialog phrases (2026-11-03)
+When an NPC talks to a player, the phrase text did not appear as a subtitle: the speaker only saw the dialog window, the other players a PDA news row. `coop_subtitles.script`
+now also wraps two functions of the mod's PDA sync (`coop_pda_archive_sync`): `emit_phrase` (runs on the player who talks) shows the phrase as a bottom subtitle, and
+`apply_news` (runs on the other players, news_type 1 = dialog phrase, caption = speaker name) shows "Speaker: text". Both retry once a second until the sync script is loaded.
+Written offline, not yet seen in game (a bottom subtitle is a HUD static, so it may stay hidden while the dialog window itself is open).

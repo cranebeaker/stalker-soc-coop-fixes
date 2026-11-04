@@ -1,0 +1,118 @@
+-------------------------------------------------------------------------------------------------------
+-- Bar arena (Arnie): a fight can no longer hang on the last one or two mutants (patch arena_stragglers, see its NOTES.md).
+-- The file name starts with coop_scn_ so that the Scene Director (cutscenes_core) loads it on every level; it only installs a server tick.
+--
+-- The arena fight ends when the WHOLE mutant squad is dead (squad on_death -> ..._SQUAD_DEAD flag -> the stop restrictor takes the players out).
+-- With more players the player scaling adds members to the squad (8 bloodsuckers became 12 with two players), and weak bloodsuckers are
+-- invisible most of the time, so "I killed everything" often left one or two alive somewhere and nothing happened.
+-- The scaling stays. This tick watches the arena squads: when at most STRAGGLERS members are alive and no member has died for STALL_MS,
+-- the remaining ones are killed, which sends the normal squad death (flags, teleport out, reward) down the stock path.
+-------------------------------------------------------------------------------------------------------
+
+local MAP = "coop_l05_bar"
+local SQUADS = {
+	"bar_arny_arena_smart_terrain_dog_squad",
+	"bar_arny_arena_smart_terrain_pseudodog_squad",
+	"bar_arny_arena_smart_terrain_boar_squad",
+	"bar_arny_arena_smart_terrain_bloodsucker_squad",
+}
+local STRAGGLERS = 2        -- at most this many alive
+local STALL_MS   = 60000    -- nobody died for this long
+local GO_FLAG    = "BAR_ARNY_ARENA_SMART_TERRAIN_START_ARENA_GO"
+
+local gen = 0
+local watch = {}            -- squad story name -> { alive = n, since = ms }
+local t_srv = 0
+
+local function qlog(s)
+	pcall(printf_msg, "%s", "ARENA " .. tostring(s))
+	local bot = rawget(_G, "cs_bot")
+	if bot and bot.log then pcall(bot.log, "ARENA " .. tostring(s)) end
+end
+
+local function has(f)
+	local ok, r = pcall(story_flags.has_flag, f)
+	return ok and r and true or false
+end
+
+local function any_player()
+	if db == nil or db.mp_actors == nil then return nil end
+	for _, a in pairs(db.mp_actors) do
+		if a ~= nil then return a end
+	end
+	return nil
+end
+
+-- alive members of the squad: { objects of the online ones that are alive }, count of members that are not online (unknown, counted alive)
+local function members_state(se)
+	local alive_online, offline = {}, 0
+	for k in se:squad_members() do
+		local o = level.object_by_id(k.id)
+		if o == nil then
+			offline = offline + 1
+		else
+			local ok, al = pcall(function() return o:alive() end)
+			if ok and al then alive_online[#alive_online + 1] = o end
+		end
+	end
+	return alive_online, offline
+end
+
+local function check_squad(name, now)
+	local sid = get_story_object_id(name)
+	local se = sid and alife():object(sid)
+	if se == nil then
+		watch[name] = nil
+		return
+	end
+	local alive_online, offline = members_state(se)
+	local n = #alive_online + offline
+	local w = watch[name]
+	if w == nil or n ~= w.alive then
+		watch[name] = { alive = n, since = now }
+		return
+	end
+	-- unchanged: nothing died since w.since
+	if offline > 0 or n == 0 or n > STRAGGLERS then return end
+	if now - w.since < STALL_MS then return end
+	qlog(string.format("%s: %d left and no kill for %d s: finishing the squad", name, n, math.floor((now - w.since) / 1000)))
+	local killer = any_player()
+	for _, o in ipairs(alive_online) do
+		pcall(function() o:kill(killer or o) end)
+	end
+	watch[name] = nil
+end
+
+local function tick_server(now)
+	if now - t_srv < 1000 then return end
+	t_srv = now
+	if level.name() ~= MAP then return end
+	if not has(GO_FLAG) then
+		watch = {}
+		return
+	end
+	for _, name in ipairs(SQUADS) do
+		local ok, err = pcall(check_squad, name, now)
+		if not ok then qlog("CHECKERR " .. name .. " " .. tostring(err)) end
+	end
+end
+
+function install()
+	gen = gen + 1
+	local my = gen
+	pcall(function()
+		level.add_call(function()
+			if my ~= gen then return true end
+			if OnServer() then
+				local ok, err = pcall(tick_server, time_global())
+				if not ok then qlog("TICKERR " .. tostring(err)) end
+			end
+			return false
+		end, function() end)
+	end)
+	local okn, ln = pcall(function() return level.name() end)
+	qlog("INSTALL gen=" .. my .. " level=" .. tostring(okn and ln or "?"))
+end
+
+-- loaded by the Scene Director on every level (once per Lua VM)
+pcall(function() install() end)
