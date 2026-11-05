@@ -29,7 +29,7 @@ Install the Shadow of COOP fix patch v1.5.8 on this PC and verify it. The game i
    It patches game\bin\xrCore.dll (keeps xrCore.dll.orig), writes the fixes, the movies and the Full HD movies into coop.addon and copies the movie sound of my language into game\patches. If it says it cannot open coop.addon, the game or launcher is still open: close it and run again. If it says xrCore.dll is not the one the patch was made for, the launcher has a different game version: stop and tell me.
 6. Verify, and show me the results:
    a. The installer printed "Installed." and the line "Addon fingerprint ... : 564999CA38D1". If the fingerprint differs, something is wrong (wrong add-on version or an extra file in coop.addon): tell me, do not continue.
-   b. <game>\addons\coop.addon is 5,718,425,600 bytes.
+   b. <game>\addons\coop.addon is 5,718,435,840 bytes.
    c. SHA-256 of <game>\bin\xrCore.dll starts with CAF069C239C4394B, and <game>\bin\xrCore.dll.orig exists and starts with 073172E1766BA125.
    d. <game>\patches contains zz_soc_cutscenes_voice_eng.db or zz_soc_cutscenes_voice_rus.db.
 7. Tell me to open the launcher and join the host, and to run install.bat again if the launcher ever updates the game ("Different Versions" on joining means the fingerprint differs: rerun the installer).
