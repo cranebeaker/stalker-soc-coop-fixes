@@ -48,18 +48,18 @@
     <dialog id="esc_rookie_technician_start_dialog">
         <phrase_list>
             <phrase id="0">
-                <text>esc_rookie_technician_start_dialog_0</text>
+                <text>esc_rookie_technician_start_dialog_0</text><action>coop_subs_say.sp_1</action>
             </phrase>
         </phrase_list>
     </dialog>
     <dialog id="esc_rookie_technician_what_can_you_do">
         <phrase_list>
             <phrase id="0">
-                <text>esc_rookie_technician_what_can_you_do_0</text>
+                <text>esc_rookie_technician_what_can_you_do_0</text><action>coop_subs_say.sp_2</action>
                 <next>1</next>
             </phrase>
             <phrase id="1">
-                <text>esc_rookie_technician_what_can_you_do_1</text>
+                <text>esc_rookie_technician_what_can_you_do_1</text><action>coop_subs_say.sp_3</action>
             </phrase>
         </phrase_list>
     </dialog>

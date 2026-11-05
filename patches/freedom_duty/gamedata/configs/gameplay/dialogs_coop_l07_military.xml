@@ -81,37 +81,37 @@
         <dont_has_flag>MIL_MAX_FLASH_JOB_INFO</dont_has_flag>
         <phrase_list>
             <phrase id="0">
-                <text>mil_max_flash_d_opener</text>
+                <text>mil_max_flash_d_opener</text><action>coop_subs_say.sp_6</action>
                 <next>1</next>
             </phrase>
             <phrase id="1">
-                <text>mil_max_flash_d_offer</text>
+                <text>mil_max_flash_d_offer</text><action>coop_subs_say.sp_7</action>
                 <next>2</next>
             </phrase>
             <phrase id="2">
-                <text>mil_max_flash_d_what</text>
+                <text>mil_max_flash_d_what</text><action>coop_subs_say.sp_8</action>
                 <next>3</next>
             </phrase>
             <phrase id="3">
-                <text>mil_max_flash_d_task</text>
+                <text>mil_max_flash_d_task</text><action>coop_subs_say.sp_9</action>
                 <next>4</next>
                 <next>6</next>
             </phrase>
             <phrase id="4">
-                <text>mil_max_flash_d_accept</text>
+                <text>mil_max_flash_d_accept</text><action>coop_subs_say.sp_10</action>
                 <give_flag>MIL_MAX_FLASH_JOB_INFO</give_flag>
                 <next>5</next>
             </phrase>
             <phrase id="5">
-                <text>mil_max_flash_d_luck</text>
+                <text>mil_max_flash_d_luck</text><action>coop_subs_say.sp_11</action>
                 <action>dialogs.break_dialog</action>
             </phrase>
             <phrase id="6">
-                <text>mil_max_flash_d_decline</text>
+                <text>mil_max_flash_d_decline</text><action>coop_subs_say.sp_12</action>
                 <next>7</next>
             </phrase>
             <phrase id="7">
-                <text>mil_max_flash_d_decline_r</text>
+                <text>mil_max_flash_d_decline_r</text><action>coop_subs_say.sp_13</action>
                 <action>dialogs.break_dialog</action>
             </phrase>
         </phrase_list>
@@ -122,29 +122,29 @@
         <dont_has_flag>MIL_MAX_FLASH_JOB_COMPLETE_INFO</dont_has_flag>
         <phrase_list>
             <phrase id="0">
-                <text>mil_max_flash_r_opener</text>
+                <text>mil_max_flash_r_opener</text><action>coop_subs_say.sp_14</action>
                 <next>1</next>
             </phrase>
             <phrase id="1">
-                <text>mil_max_flash_r_asked</text>
+                <text>mil_max_flash_r_asked</text><action>coop_subs_say.sp_15</action>
                 <next>2</next>
             </phrase>
             <phrase id="2">
-                <text>mil_max_flash_r_give</text>
+                <text>mil_max_flash_r_give</text><action>coop_subs_say.sp_16</action>
                 <action>dialogs_coop_l07_military.transfer_crazy_flash</action>
                 <give_flag>MIL_MAX_FLASH_JOB_COMPLETE_INFO</give_flag>
                 <next>3</next>
             </phrase>
             <phrase id="3">
-                <text>mil_max_flash_r_thanks</text>
+                <text>mil_max_flash_r_thanks</text><action>coop_subs_say.sp_17</action>
                 <next>4</next>
             </phrase>
             <phrase id="4">
-                <text>mil_max_flash_r_ammo</text>
+                <text>mil_max_flash_r_ammo</text><action>coop_subs_say.sp_18</action>
                 <next>5</next>
             </phrase>
             <phrase id="5">
-                <text>mil_max_flash_r_noammo</text>
+                <text>mil_max_flash_r_noammo</text><action>coop_subs_say.sp_19</action>
                 <action>dialogs.break_dialog</action>
             </phrase>
         </phrase_list>
@@ -155,11 +155,11 @@
         <dont_has_flag>MIL_MAX_FLASH_JOB_COMPLETE_INFO</dont_has_flag>
         <phrase_list>
             <phrase id="0">
-                <text>mil_max_flash_w_opener</text>
+                <text>mil_max_flash_w_opener</text><action>coop_subs_say.sp_20</action>
                 <next>1</next>
             </phrase>
             <phrase id="1">
-                <text>mil_max_flash_w_already</text>
+                <text>mil_max_flash_w_already</text><action>coop_subs_say.sp_21</action>
                 <action>dialogs.break_dialog</action>
             </phrase>
         </phrase_list>

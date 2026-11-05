@@ -2,360 +2,360 @@
 <game_dialogs>
   <dialog id="rq_sid_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_sid_camp_offer</text><dont_has_flag>RQG_RQ_SID_CAMP_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_sid_camp_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_sid_camp_accept</text><dont_has_flag>RQG_RQ_SID_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_SID_CAMP_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_sid_kill_offer</text><dont_has_flag>RQG_RQ_SID_KILL_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_sid_kill_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_sid_kill_accept</text><dont_has_flag>RQG_RQ_SID_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_SID_KILL_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_sid_defend_offer</text><dont_has_flag>RQG_RQ_SID_DEFEND_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_sid_defend_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_sid_defend_accept</text><dont_has_flag>RQG_RQ_SID_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_SID_DEFEND_ACC</give_flag></phrase>
-      <phrase id="100"><text>rq_sid_art1_offer</text><precondition>coop_rq_dialogs.offer_rq_sid_art1</precondition><dont_has_flag>RQG_RQ_SID_ART1_ACC</dont_has_flag><next>200</next></phrase>
-      <phrase id="200"><text>rq_sid_art1_npc</text><next>300</next><next>99</next></phrase>
-      <phrase id="300"><text>rq_sid_art1_accept</text><dont_has_flag>RQG_RQ_SID_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART1_ACC</give_flag></phrase>
-      <phrase id="101"><text>rq_sid_art2_offer</text><precondition>coop_rq_dialogs.offer_rq_sid_art2</precondition><dont_has_flag>RQG_RQ_SID_ART2_ACC</dont_has_flag><next>201</next></phrase>
-      <phrase id="201"><text>rq_sid_art2_npc</text><next>301</next><next>99</next></phrase>
-      <phrase id="301"><text>rq_sid_art2_accept</text><dont_has_flag>RQG_RQ_SID_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART2_ACC</give_flag></phrase>
-      <phrase id="102"><text>rq_sid_art4_offer</text><precondition>coop_rq_dialogs.offer_rq_sid_art4</precondition><dont_has_flag>RQG_RQ_SID_ART4_ACC</dont_has_flag><next>202</next></phrase>
-      <phrase id="202"><text>rq_sid_art4_npc</text><next>302</next><next>99</next></phrase>
-      <phrase id="302"><text>rq_sid_art4_accept</text><dont_has_flag>RQG_RQ_SID_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART4_ACC</give_flag></phrase>
-      <phrase id="103"><text>rq_sid_part1_offer</text><precondition>coop_rq_dialogs.offer_rq_sid_part1</precondition><dont_has_flag>RQG_RQ_SID_PART1_ACC</dont_has_flag><next>203</next></phrase>
-      <phrase id="203"><text>rq_sid_part1_npc</text><next>303</next><next>99</next></phrase>
-      <phrase id="303"><text>rq_sid_part1_accept</text><dont_has_flag>RQG_RQ_SID_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_SID_PART1_ACC</give_flag></phrase>
-      <phrase id="104"><text>rq_sid_part2_offer</text><precondition>coop_rq_dialogs.offer_rq_sid_part2</precondition><dont_has_flag>RQG_RQ_SID_PART2_ACC</dont_has_flag><next>204</next></phrase>
-      <phrase id="204"><text>rq_sid_part2_npc</text><next>304</next><next>99</next></phrase>
-      <phrase id="304"><text>rq_sid_part2_accept</text><dont_has_flag>RQG_RQ_SID_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_SID_PART2_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_29</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_30</action><next>10</next><next>11</next><next>12</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_sid_camp_offer</text><action>coop_subs_say.sp_31</action><dont_has_flag>RQG_RQ_SID_CAMP_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_sid_camp_npc</text><action>coop_subs_say.sp_32</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_sid_camp_accept</text><action>coop_subs_say.sp_33</action><dont_has_flag>RQG_RQ_SID_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_SID_CAMP_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_sid_kill_offer</text><action>coop_subs_say.sp_34</action><dont_has_flag>RQG_RQ_SID_KILL_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_sid_kill_npc</text><action>coop_subs_say.sp_35</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_sid_kill_accept</text><action>coop_subs_say.sp_36</action><dont_has_flag>RQG_RQ_SID_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_SID_KILL_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_sid_defend_offer</text><action>coop_subs_say.sp_37</action><dont_has_flag>RQG_RQ_SID_DEFEND_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_sid_defend_npc</text><action>coop_subs_say.sp_38</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_sid_defend_accept</text><action>coop_subs_say.sp_39</action><dont_has_flag>RQG_RQ_SID_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_SID_DEFEND_ACC</give_flag></phrase>
+      <phrase id="100"><text>rq_sid_art1_offer</text><action>coop_subs_say.sp_40</action><precondition>coop_rq_dialogs.offer_rq_sid_art1</precondition><dont_has_flag>RQG_RQ_SID_ART1_ACC</dont_has_flag><next>200</next></phrase>
+      <phrase id="200"><text>rq_sid_art1_npc</text><action>coop_subs_say.sp_41</action><next>300</next><next>99</next></phrase>
+      <phrase id="300"><text>rq_sid_art1_accept</text><action>coop_subs_say.sp_42</action><dont_has_flag>RQG_RQ_SID_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART1_ACC</give_flag></phrase>
+      <phrase id="101"><text>rq_sid_art2_offer</text><action>coop_subs_say.sp_43</action><precondition>coop_rq_dialogs.offer_rq_sid_art2</precondition><dont_has_flag>RQG_RQ_SID_ART2_ACC</dont_has_flag><next>201</next></phrase>
+      <phrase id="201"><text>rq_sid_art2_npc</text><action>coop_subs_say.sp_44</action><next>301</next><next>99</next></phrase>
+      <phrase id="301"><text>rq_sid_art2_accept</text><action>coop_subs_say.sp_45</action><dont_has_flag>RQG_RQ_SID_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART2_ACC</give_flag></phrase>
+      <phrase id="102"><text>rq_sid_art4_offer</text><action>coop_subs_say.sp_46</action><precondition>coop_rq_dialogs.offer_rq_sid_art4</precondition><dont_has_flag>RQG_RQ_SID_ART4_ACC</dont_has_flag><next>202</next></phrase>
+      <phrase id="202"><text>rq_sid_art4_npc</text><action>coop_subs_say.sp_47</action><next>302</next><next>99</next></phrase>
+      <phrase id="302"><text>rq_sid_art4_accept</text><action>coop_subs_say.sp_48</action><dont_has_flag>RQG_RQ_SID_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_SID_ART4_ACC</give_flag></phrase>
+      <phrase id="103"><text>rq_sid_part1_offer</text><action>coop_subs_say.sp_49</action><precondition>coop_rq_dialogs.offer_rq_sid_part1</precondition><dont_has_flag>RQG_RQ_SID_PART1_ACC</dont_has_flag><next>203</next></phrase>
+      <phrase id="203"><text>rq_sid_part1_npc</text><action>coop_subs_say.sp_50</action><next>303</next><next>99</next></phrase>
+      <phrase id="303"><text>rq_sid_part1_accept</text><action>coop_subs_say.sp_51</action><dont_has_flag>RQG_RQ_SID_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_SID_PART1_ACC</give_flag></phrase>
+      <phrase id="104"><text>rq_sid_part2_offer</text><action>coop_subs_say.sp_52</action><precondition>coop_rq_dialogs.offer_rq_sid_part2</precondition><dont_has_flag>RQG_RQ_SID_PART2_ACC</dont_has_flag><next>204</next></phrase>
+      <phrase id="204"><text>rq_sid_part2_npc</text><action>coop_subs_say.sp_53</action><next>304</next><next>99</next></phrase>
+      <phrase id="304"><text>rq_sid_part2_accept</text><action>coop_subs_say.sp_54</action><dont_has_flag>RQG_RQ_SID_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_SID_PART2_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_55</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_wolf_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_wolf_camp1_offer</text><dont_has_flag>RQG_RQ_WOLF_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_wolf_camp1_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_wolf_camp1_accept</text><dont_has_flag>RQG_RQ_WOLF_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_WOLF_CAMP1_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_wolf_camp2_offer</text><dont_has_flag>RQG_RQ_WOLF_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_wolf_camp2_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_wolf_camp2_accept</text><dont_has_flag>RQG_RQ_WOLF_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_WOLF_CAMP2_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_shu_find_offer</text><dont_has_flag>RQG_RQ_SHU_FIND_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_shu_find_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_shu_find_accept</text><dont_has_flag>RQG_RQ_SHU_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_SHU_FIND_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_56</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_57</action><next>10</next><next>11</next><next>12</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_wolf_camp1_offer</text><action>coop_subs_say.sp_58</action><dont_has_flag>RQG_RQ_WOLF_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_wolf_camp1_npc</text><action>coop_subs_say.sp_59</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_wolf_camp1_accept</text><action>coop_subs_say.sp_60</action><dont_has_flag>RQG_RQ_WOLF_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_WOLF_CAMP1_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_wolf_camp2_offer</text><action>coop_subs_say.sp_61</action><dont_has_flag>RQG_RQ_WOLF_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_wolf_camp2_npc</text><action>coop_subs_say.sp_62</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_wolf_camp2_accept</text><action>coop_subs_say.sp_63</action><dont_has_flag>RQG_RQ_WOLF_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_WOLF_CAMP2_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_shu_find_offer</text><action>coop_subs_say.sp_64</action><dont_has_flag>RQG_RQ_SHU_FIND_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_shu_find_npc</text><action>coop_subs_say.sp_65</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_shu_find_accept</text><action>coop_subs_say.sp_66</action><dont_has_flag>RQG_RQ_SHU_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_SHU_FIND_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_67</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_wolf_handin">
     <precondition>coop_rq_dialogs.find_open_wolf</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin</text><next>5</next></phrase>
-      <phrase id="5"><text>rq_handin_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_shu_find</text><precondition>coop_rq_dialogs.has_rq_wpn_fort</precondition><has_flag>RQG_RQ_SHU_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_SHU_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SHU_FIND_FAIL</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_handin_ok</text><action>coop_rq_dialogs.take_rq_wpn_fort</action><give_flag>RQG_RQ_SHU_FIND_DONE</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin</text><action>coop_subs_say.sp_68</action><next>5</next></phrase>
+      <phrase id="5"><text>rq_handin_ask</text><action>coop_subs_say.sp_69</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_shu_find</text><action>coop_subs_say.sp_70</action><precondition>coop_rq_dialogs.has_rq_wpn_fort</precondition><has_flag>RQG_RQ_SHU_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_SHU_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SHU_FIND_FAIL</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_handin_ok</text><action>coop_subs_say.sp_71</action><action>coop_rq_dialogs.take_rq_wpn_fort</action><give_flag>RQG_RQ_SHU_FIND_DONE</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_72</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_bar_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>105</next><next>106</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_bar_kill1_offer</text><dont_has_flag>RQG_RQ_BAR_KILL1_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_bar_kill1_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_bar_kill1_accept</text><dont_has_flag>RQG_RQ_BAR_KILL1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_KILL1_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_bar_kill2_offer</text><dont_has_flag>RQG_RQ_BAR_KILL2_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_bar_kill2_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_bar_kill2_accept</text><dont_has_flag>RQG_RQ_BAR_KILL2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_KILL2_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_bar_camp1_offer</text><dont_has_flag>RQG_RQ_BAR_CAMP1_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_bar_camp1_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_bar_camp1_accept</text><dont_has_flag>RQG_RQ_BAR_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_CAMP1_ACC</give_flag></phrase>
-      <phrase id="13"><text>rq_bar_camp2_offer</text><dont_has_flag>RQG_RQ_BAR_CAMP2_ACC</dont_has_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_bar_camp2_npc</text><next>53</next><next>99</next></phrase>
-      <phrase id="53"><text>rq_bar_camp2_accept</text><dont_has_flag>RQG_RQ_BAR_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_CAMP2_ACC</give_flag></phrase>
-      <phrase id="14"><text>rq_bar_defend_offer</text><dont_has_flag>RQG_RQ_BAR_DEFEND_ACC</dont_has_flag><next>34</next></phrase>
-      <phrase id="34"><text>rq_bar_defend_npc</text><next>54</next><next>99</next></phrase>
-      <phrase id="54"><text>rq_bar_defend_accept</text><dont_has_flag>RQG_RQ_BAR_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_DEFEND_ACC</give_flag></phrase>
-      <phrase id="100"><text>rq_bar_art1_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_art1</precondition><dont_has_flag>RQG_RQ_BAR_ART1_ACC</dont_has_flag><next>200</next></phrase>
-      <phrase id="200"><text>rq_bar_art1_npc</text><next>300</next><next>99</next></phrase>
-      <phrase id="300"><text>rq_bar_art1_accept</text><dont_has_flag>RQG_RQ_BAR_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART1_ACC</give_flag></phrase>
-      <phrase id="101"><text>rq_bar_art2_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_art2</precondition><dont_has_flag>RQG_RQ_BAR_ART2_ACC</dont_has_flag><next>201</next></phrase>
-      <phrase id="201"><text>rq_bar_art2_npc</text><next>301</next><next>99</next></phrase>
-      <phrase id="301"><text>rq_bar_art2_accept</text><dont_has_flag>RQG_RQ_BAR_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART2_ACC</give_flag></phrase>
-      <phrase id="102"><text>rq_bar_art3_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_art3</precondition><dont_has_flag>RQG_RQ_BAR_ART3_ACC</dont_has_flag><next>202</next></phrase>
-      <phrase id="202"><text>rq_bar_art3_npc</text><next>302</next><next>99</next></phrase>
-      <phrase id="302"><text>rq_bar_art3_accept</text><dont_has_flag>RQG_RQ_BAR_ART3_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART3_ACC</give_flag></phrase>
-      <phrase id="103"><text>rq_bar_art4_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_art4</precondition><dont_has_flag>RQG_RQ_BAR_ART4_ACC</dont_has_flag><next>203</next></phrase>
-      <phrase id="203"><text>rq_bar_art4_npc</text><next>303</next><next>99</next></phrase>
-      <phrase id="303"><text>rq_bar_art4_accept</text><dont_has_flag>RQG_RQ_BAR_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART4_ACC</give_flag></phrase>
-      <phrase id="104"><text>rq_bar_art5_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_art5</precondition><dont_has_flag>RQG_RQ_BAR_ART5_ACC</dont_has_flag><next>204</next></phrase>
-      <phrase id="204"><text>rq_bar_art5_npc</text><next>304</next><next>99</next></phrase>
-      <phrase id="304"><text>rq_bar_art5_accept</text><dont_has_flag>RQG_RQ_BAR_ART5_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART5_ACC</give_flag></phrase>
-      <phrase id="105"><text>rq_bar_part1_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_part1</precondition><dont_has_flag>RQG_RQ_BAR_PART1_ACC</dont_has_flag><next>205</next></phrase>
-      <phrase id="205"><text>rq_bar_part1_npc</text><next>305</next><next>99</next></phrase>
-      <phrase id="305"><text>rq_bar_part1_accept</text><dont_has_flag>RQG_RQ_BAR_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_PART1_ACC</give_flag></phrase>
-      <phrase id="106"><text>rq_bar_part2_offer</text><precondition>coop_rq_dialogs.offer_rq_bar_part2</precondition><dont_has_flag>RQG_RQ_BAR_PART2_ACC</dont_has_flag><next>206</next></phrase>
-      <phrase id="206"><text>rq_bar_part2_npc</text><next>306</next><next>99</next></phrase>
-      <phrase id="306"><text>rq_bar_part2_accept</text><dont_has_flag>RQG_RQ_BAR_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_PART2_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_73</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_74</action><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>105</next><next>106</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_bar_kill1_offer</text><action>coop_subs_say.sp_75</action><dont_has_flag>RQG_RQ_BAR_KILL1_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_bar_kill1_npc</text><action>coop_subs_say.sp_76</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_bar_kill1_accept</text><action>coop_subs_say.sp_77</action><dont_has_flag>RQG_RQ_BAR_KILL1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_KILL1_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_bar_kill2_offer</text><action>coop_subs_say.sp_78</action><dont_has_flag>RQG_RQ_BAR_KILL2_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_bar_kill2_npc</text><action>coop_subs_say.sp_79</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_bar_kill2_accept</text><action>coop_subs_say.sp_80</action><dont_has_flag>RQG_RQ_BAR_KILL2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_KILL2_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_bar_camp1_offer</text><action>coop_subs_say.sp_81</action><dont_has_flag>RQG_RQ_BAR_CAMP1_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_bar_camp1_npc</text><action>coop_subs_say.sp_82</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_bar_camp1_accept</text><action>coop_subs_say.sp_83</action><dont_has_flag>RQG_RQ_BAR_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_CAMP1_ACC</give_flag></phrase>
+      <phrase id="13"><text>rq_bar_camp2_offer</text><action>coop_subs_say.sp_84</action><dont_has_flag>RQG_RQ_BAR_CAMP2_ACC</dont_has_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_bar_camp2_npc</text><action>coop_subs_say.sp_85</action><next>53</next><next>99</next></phrase>
+      <phrase id="53"><text>rq_bar_camp2_accept</text><action>coop_subs_say.sp_86</action><dont_has_flag>RQG_RQ_BAR_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_CAMP2_ACC</give_flag></phrase>
+      <phrase id="14"><text>rq_bar_defend_offer</text><action>coop_subs_say.sp_87</action><dont_has_flag>RQG_RQ_BAR_DEFEND_ACC</dont_has_flag><next>34</next></phrase>
+      <phrase id="34"><text>rq_bar_defend_npc</text><action>coop_subs_say.sp_88</action><next>54</next><next>99</next></phrase>
+      <phrase id="54"><text>rq_bar_defend_accept</text><action>coop_subs_say.sp_89</action><dont_has_flag>RQG_RQ_BAR_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_DEFEND_ACC</give_flag></phrase>
+      <phrase id="100"><text>rq_bar_art1_offer</text><action>coop_subs_say.sp_90</action><precondition>coop_rq_dialogs.offer_rq_bar_art1</precondition><dont_has_flag>RQG_RQ_BAR_ART1_ACC</dont_has_flag><next>200</next></phrase>
+      <phrase id="200"><text>rq_bar_art1_npc</text><action>coop_subs_say.sp_91</action><next>300</next><next>99</next></phrase>
+      <phrase id="300"><text>rq_bar_art1_accept</text><action>coop_subs_say.sp_92</action><dont_has_flag>RQG_RQ_BAR_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART1_ACC</give_flag></phrase>
+      <phrase id="101"><text>rq_bar_art2_offer</text><action>coop_subs_say.sp_93</action><precondition>coop_rq_dialogs.offer_rq_bar_art2</precondition><dont_has_flag>RQG_RQ_BAR_ART2_ACC</dont_has_flag><next>201</next></phrase>
+      <phrase id="201"><text>rq_bar_art2_npc</text><action>coop_subs_say.sp_94</action><next>301</next><next>99</next></phrase>
+      <phrase id="301"><text>rq_bar_art2_accept</text><action>coop_subs_say.sp_95</action><dont_has_flag>RQG_RQ_BAR_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART2_ACC</give_flag></phrase>
+      <phrase id="102"><text>rq_bar_art3_offer</text><action>coop_subs_say.sp_96</action><precondition>coop_rq_dialogs.offer_rq_bar_art3</precondition><dont_has_flag>RQG_RQ_BAR_ART3_ACC</dont_has_flag><next>202</next></phrase>
+      <phrase id="202"><text>rq_bar_art3_npc</text><action>coop_subs_say.sp_97</action><next>302</next><next>99</next></phrase>
+      <phrase id="302"><text>rq_bar_art3_accept</text><action>coop_subs_say.sp_98</action><dont_has_flag>RQG_RQ_BAR_ART3_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART3_ACC</give_flag></phrase>
+      <phrase id="103"><text>rq_bar_art4_offer</text><action>coop_subs_say.sp_99</action><precondition>coop_rq_dialogs.offer_rq_bar_art4</precondition><dont_has_flag>RQG_RQ_BAR_ART4_ACC</dont_has_flag><next>203</next></phrase>
+      <phrase id="203"><text>rq_bar_art4_npc</text><action>coop_subs_say.sp_100</action><next>303</next><next>99</next></phrase>
+      <phrase id="303"><text>rq_bar_art4_accept</text><action>coop_subs_say.sp_101</action><dont_has_flag>RQG_RQ_BAR_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART4_ACC</give_flag></phrase>
+      <phrase id="104"><text>rq_bar_art5_offer</text><action>coop_subs_say.sp_102</action><precondition>coop_rq_dialogs.offer_rq_bar_art5</precondition><dont_has_flag>RQG_RQ_BAR_ART5_ACC</dont_has_flag><next>204</next></phrase>
+      <phrase id="204"><text>rq_bar_art5_npc</text><action>coop_subs_say.sp_103</action><next>304</next><next>99</next></phrase>
+      <phrase id="304"><text>rq_bar_art5_accept</text><action>coop_subs_say.sp_104</action><dont_has_flag>RQG_RQ_BAR_ART5_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_ART5_ACC</give_flag></phrase>
+      <phrase id="105"><text>rq_bar_part1_offer</text><action>coop_subs_say.sp_105</action><precondition>coop_rq_dialogs.offer_rq_bar_part1</precondition><dont_has_flag>RQG_RQ_BAR_PART1_ACC</dont_has_flag><next>205</next></phrase>
+      <phrase id="205"><text>rq_bar_part1_npc</text><action>coop_subs_say.sp_106</action><next>305</next><next>99</next></phrase>
+      <phrase id="305"><text>rq_bar_part1_accept</text><action>coop_subs_say.sp_107</action><dont_has_flag>RQG_RQ_BAR_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_PART1_ACC</give_flag></phrase>
+      <phrase id="106"><text>rq_bar_part2_offer</text><action>coop_subs_say.sp_108</action><precondition>coop_rq_dialogs.offer_rq_bar_part2</precondition><dont_has_flag>RQG_RQ_BAR_PART2_ACC</dont_has_flag><next>206</next></phrase>
+      <phrase id="206"><text>rq_bar_part2_npc</text><action>coop_subs_say.sp_109</action><next>306</next><next>99</next></phrase>
+      <phrase id="306"><text>rq_bar_part2_accept</text><action>coop_subs_say.sp_110</action><dont_has_flag>RQG_RQ_BAR_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_BAR_PART2_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_111</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_vor_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_vor_camp1_offer</text><dont_has_flag>RQG_RQ_VOR_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_vor_camp1_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_vor_camp1_accept</text><dont_has_flag>RQG_RQ_VOR_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP1_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_vor_camp2_offer</text><dont_has_flag>RQG_RQ_VOR_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_vor_camp2_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_vor_camp2_accept</text><dont_has_flag>RQG_RQ_VOR_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP2_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_vor_kill_offer</text><dont_has_flag>RQG_RQ_VOR_KILL_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_vor_kill_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_vor_kill_accept</text><dont_has_flag>RQG_RQ_VOR_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_KILL_ACC</give_flag></phrase>
-      <phrase id="13"><text>rq_vor_defend_offer</text><dont_has_flag>RQG_RQ_VOR_DEFEND_ACC</dont_has_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_vor_defend_npc</text><next>53</next><next>99</next></phrase>
-      <phrase id="53"><text>rq_vor_defend_accept</text><dont_has_flag>RQG_RQ_VOR_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_DEFEND_ACC</give_flag></phrase>
-      <phrase id="14"><text>rq_vor_find_offer</text><dont_has_flag>RQG_RQ_VOR_FIND_ACC</dont_has_flag><next>34</next></phrase>
-      <phrase id="34"><text>rq_vor_find_npc</text><next>54</next><next>99</next></phrase>
-      <phrase id="54"><text>rq_vor_find_accept</text><dont_has_flag>RQG_RQ_VOR_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_FIND_ACC</give_flag></phrase>
-      <phrase id="15"><text>rq_vor_camp3_offer</text><dont_has_flag>RQG_RQ_VOR_CAMP3_ACC</dont_has_flag><next>35</next></phrase>
-      <phrase id="35"><text>rq_vor_camp3_npc</text><next>55</next><next>99</next></phrase>
-      <phrase id="55"><text>rq_vor_camp3_accept</text><dont_has_flag>RQG_RQ_VOR_CAMP3_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP3_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_112</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_113</action><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_vor_camp1_offer</text><action>coop_subs_say.sp_114</action><dont_has_flag>RQG_RQ_VOR_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_vor_camp1_npc</text><action>coop_subs_say.sp_115</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_vor_camp1_accept</text><action>coop_subs_say.sp_116</action><dont_has_flag>RQG_RQ_VOR_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP1_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_vor_camp2_offer</text><action>coop_subs_say.sp_117</action><dont_has_flag>RQG_RQ_VOR_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_vor_camp2_npc</text><action>coop_subs_say.sp_118</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_vor_camp2_accept</text><action>coop_subs_say.sp_119</action><dont_has_flag>RQG_RQ_VOR_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP2_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_vor_kill_offer</text><action>coop_subs_say.sp_120</action><dont_has_flag>RQG_RQ_VOR_KILL_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_vor_kill_npc</text><action>coop_subs_say.sp_121</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_vor_kill_accept</text><action>coop_subs_say.sp_122</action><dont_has_flag>RQG_RQ_VOR_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_KILL_ACC</give_flag></phrase>
+      <phrase id="13"><text>rq_vor_defend_offer</text><action>coop_subs_say.sp_123</action><dont_has_flag>RQG_RQ_VOR_DEFEND_ACC</dont_has_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_vor_defend_npc</text><action>coop_subs_say.sp_124</action><next>53</next><next>99</next></phrase>
+      <phrase id="53"><text>rq_vor_defend_accept</text><action>coop_subs_say.sp_125</action><dont_has_flag>RQG_RQ_VOR_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_DEFEND_ACC</give_flag></phrase>
+      <phrase id="14"><text>rq_vor_find_offer</text><action>coop_subs_say.sp_126</action><dont_has_flag>RQG_RQ_VOR_FIND_ACC</dont_has_flag><next>34</next></phrase>
+      <phrase id="34"><text>rq_vor_find_npc</text><action>coop_subs_say.sp_127</action><next>54</next><next>99</next></phrase>
+      <phrase id="54"><text>rq_vor_find_accept</text><action>coop_subs_say.sp_128</action><dont_has_flag>RQG_RQ_VOR_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_FIND_ACC</give_flag></phrase>
+      <phrase id="15"><text>rq_vor_camp3_offer</text><action>coop_subs_say.sp_129</action><dont_has_flag>RQG_RQ_VOR_CAMP3_ACC</dont_has_flag><next>35</next></phrase>
+      <phrase id="35"><text>rq_vor_camp3_npc</text><action>coop_subs_say.sp_130</action><next>55</next><next>99</next></phrase>
+      <phrase id="55"><text>rq_vor_camp3_accept</text><action>coop_subs_say.sp_131</action><dont_has_flag>RQG_RQ_VOR_CAMP3_ACC</dont_has_flag><give_flag>RQG_RQ_VOR_CAMP3_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_132</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_vor_handin">
     <precondition>coop_rq_dialogs.find_open_vor</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin</text><next>5</next></phrase>
-      <phrase id="5"><text>rq_handin_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_vor_find</text><precondition>coop_rq_dialogs.has_rq_wpn_ak74u</precondition><has_flag>RQG_RQ_VOR_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_VOR_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_VOR_FIND_FAIL</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_handin_ok</text><action>coop_rq_dialogs.take_rq_wpn_ak74u</action><give_flag>RQG_RQ_VOR_FIND_DONE</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin</text><action>coop_subs_say.sp_133</action><next>5</next></phrase>
+      <phrase id="5"><text>rq_handin_ask</text><action>coop_subs_say.sp_134</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_vor_find</text><action>coop_subs_say.sp_135</action><precondition>coop_rq_dialogs.has_rq_wpn_ak74u</precondition><has_flag>RQG_RQ_VOR_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_VOR_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_VOR_FIND_FAIL</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_handin_ok</text><action>coop_subs_say.sp_136</action><action>coop_rq_dialogs.take_rq_wpn_ak74u</action><give_flag>RQG_RQ_VOR_FIND_DONE</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_137</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_pet_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_pet_kill_offer</text><dont_has_flag>RQG_RQ_PET_KILL_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_pet_kill_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_pet_kill_accept</text><dont_has_flag>RQG_RQ_PET_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_PET_KILL_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_138</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_139</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_pet_kill_offer</text><action>coop_subs_say.sp_140</action><dont_has_flag>RQG_RQ_PET_KILL_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_pet_kill_npc</text><action>coop_subs_say.sp_141</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_pet_kill_accept</text><action>coop_subs_say.sp_142</action><dont_has_flag>RQG_RQ_PET_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_PET_KILL_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_143</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_hun_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_hun_camp_offer</text><dont_has_flag>RQG_RQ_HUN_CAMP_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_hun_camp_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_hun_camp_accept</text><dont_has_flag>RQG_RQ_HUN_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_HUN_CAMP_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_144</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_145</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_hun_camp_offer</text><action>coop_subs_say.sp_146</action><dont_has_flag>RQG_RQ_HUN_CAMP_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_hun_camp_npc</text><action>coop_subs_say.sp_147</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_hun_camp_accept</text><action>coop_subs_say.sp_148</action><dont_has_flag>RQG_RQ_HUN_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_HUN_CAMP_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_149</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_inf_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>13</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_inf_kill_offer</text><dont_has_flag>RQG_RQ_INF_KILL_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_inf_kill_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_inf_kill_accept</text><dont_has_flag>RQG_RQ_INF_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_INF_KILL_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_inf_find_offer</text><dont_has_flag>RQG_RQ_INF_FIND_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_inf_find_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_inf_find_accept</text><dont_has_flag>RQG_RQ_INF_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_INF_FIND_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_inf_camp_offer</text><dont_has_flag>RQG_RQ_INF_CAMP_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_inf_camp_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_inf_camp_accept</text><dont_has_flag>RQG_RQ_INF_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_INF_CAMP_ACC</give_flag></phrase>
-      <phrase id="13"><text>rq_inf_defend_offer</text><dont_has_flag>RQG_RQ_INF_DEFEND_ACC</dont_has_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_inf_defend_npc</text><next>53</next><next>99</next></phrase>
-      <phrase id="53"><text>rq_inf_defend_accept</text><dont_has_flag>RQG_RQ_INF_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_INF_DEFEND_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_150</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_151</action><next>10</next><next>11</next><next>12</next><next>13</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_inf_kill_offer</text><action>coop_subs_say.sp_152</action><dont_has_flag>RQG_RQ_INF_KILL_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_inf_kill_npc</text><action>coop_subs_say.sp_153</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_inf_kill_accept</text><action>coop_subs_say.sp_154</action><dont_has_flag>RQG_RQ_INF_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_INF_KILL_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_inf_find_offer</text><action>coop_subs_say.sp_155</action><dont_has_flag>RQG_RQ_INF_FIND_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_inf_find_npc</text><action>coop_subs_say.sp_156</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_inf_find_accept</text><action>coop_subs_say.sp_157</action><dont_has_flag>RQG_RQ_INF_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_INF_FIND_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_inf_camp_offer</text><action>coop_subs_say.sp_158</action><dont_has_flag>RQG_RQ_INF_CAMP_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_inf_camp_npc</text><action>coop_subs_say.sp_159</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_inf_camp_accept</text><action>coop_subs_say.sp_160</action><dont_has_flag>RQG_RQ_INF_CAMP_ACC</dont_has_flag><give_flag>RQG_RQ_INF_CAMP_ACC</give_flag></phrase>
+      <phrase id="13"><text>rq_inf_defend_offer</text><action>coop_subs_say.sp_161</action><dont_has_flag>RQG_RQ_INF_DEFEND_ACC</dont_has_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_inf_defend_npc</text><action>coop_subs_say.sp_162</action><next>53</next><next>99</next></phrase>
+      <phrase id="53"><text>rq_inf_defend_accept</text><action>coop_subs_say.sp_163</action><dont_has_flag>RQG_RQ_INF_DEFEND_ACC</dont_has_flag><give_flag>RQG_RQ_INF_DEFEND_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_164</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_inf_handin">
     <precondition>coop_rq_dialogs.find_open_inf</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin</text><next>5</next></phrase>
-      <phrase id="5"><text>rq_handin_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_inf_find</text><precondition>coop_rq_dialogs.has_rq_wpn_desert_eagle</precondition><has_flag>RQG_RQ_INF_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_INF_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_INF_FIND_FAIL</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_handin_ok</text><action>coop_rq_dialogs.take_rq_wpn_desert_eagle</action><give_flag>RQG_RQ_INF_FIND_DONE</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin</text><action>coop_subs_say.sp_165</action><next>5</next></phrase>
+      <phrase id="5"><text>rq_handin_ask</text><action>coop_subs_say.sp_166</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_inf_find</text><action>coop_subs_say.sp_167</action><precondition>coop_rq_dialogs.has_rq_wpn_desert_eagle</precondition><has_flag>RQG_RQ_INF_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_INF_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_INF_FIND_FAIL</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_handin_ok</text><action>coop_subs_say.sp_168</action><action>coop_rq_dialogs.take_rq_wpn_desert_eagle</action><give_flag>RQG_RQ_INF_FIND_DONE</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_169</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_zho_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_zho_find_offer</text><dont_has_flag>RQG_RQ_ZHO_FIND_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_zho_find_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_zho_find_accept</text><dont_has_flag>RQG_RQ_ZHO_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_ZHO_FIND_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_170</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_171</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_zho_find_offer</text><action>coop_subs_say.sp_172</action><dont_has_flag>RQG_RQ_ZHO_FIND_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_zho_find_npc</text><action>coop_subs_say.sp_173</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_zho_find_accept</text><action>coop_subs_say.sp_174</action><dont_has_flag>RQG_RQ_ZHO_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_ZHO_FIND_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_175</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_zho_handin">
     <precondition>coop_rq_dialogs.find_open_zho</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin</text><next>5</next></phrase>
-      <phrase id="5"><text>rq_handin_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_zho_find</text><precondition>coop_rq_dialogs.has_rq_vodka</precondition><has_flag>RQG_RQ_ZHO_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_ZHO_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_ZHO_FIND_FAIL</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_handin_ok</text><action>coop_rq_dialogs.take_rq_vodka</action><give_flag>RQG_RQ_ZHO_FIND_DONE</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin</text><action>coop_subs_say.sp_176</action><next>5</next></phrase>
+      <phrase id="5"><text>rq_handin_ask</text><action>coop_subs_say.sp_177</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_zho_find</text><action>coop_subs_say.sp_178</action><precondition>coop_rq_dialogs.has_rq_vodka</precondition><has_flag>RQG_RQ_ZHO_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_ZHO_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_ZHO_FIND_FAIL</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_handin_ok</text><action>coop_subs_say.sp_179</action><action>coop_rq_dialogs.take_rq_vodka</action><give_flag>RQG_RQ_ZHO_FIND_DONE</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_180</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_ska_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_ska_kill_offer</text><dont_has_flag>RQG_RQ_SKA_KILL_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_ska_kill_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_ska_kill_accept</text><dont_has_flag>RQG_RQ_SKA_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_SKA_KILL_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_181</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_182</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_ska_kill_offer</text><action>coop_subs_say.sp_183</action><dont_has_flag>RQG_RQ_SKA_KILL_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_ska_kill_npc</text><action>coop_subs_say.sp_184</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_ska_kill_accept</text><action>coop_subs_say.sp_185</action><dont_has_flag>RQG_RQ_SKA_KILL_ACC</dont_has_flag><give_flag>RQG_RQ_SKA_KILL_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_186</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_sak_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>10</next><next>11</next><next>12</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>105</next><next>106</next><next>107</next><next>108</next><next>109</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_sak_camp1_offer</text><dont_has_flag>RQG_RQ_SAK_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_sak_camp1_npc</text><next>50</next><next>99</next></phrase>
-      <phrase id="50"><text>rq_sak_camp1_accept</text><dont_has_flag>RQG_RQ_SAK_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_CAMP1_ACC</give_flag></phrase>
-      <phrase id="11"><text>rq_sak_camp2_offer</text><dont_has_flag>RQG_RQ_SAK_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_sak_camp2_npc</text><next>51</next><next>99</next></phrase>
-      <phrase id="51"><text>rq_sak_camp2_accept</text><dont_has_flag>RQG_RQ_SAK_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_CAMP2_ACC</give_flag></phrase>
-      <phrase id="12"><text>rq_sak_find_offer</text><dont_has_flag>RQG_RQ_SAK_FIND_ACC</dont_has_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_sak_find_npc</text><next>52</next><next>99</next></phrase>
-      <phrase id="52"><text>rq_sak_find_accept</text><dont_has_flag>RQG_RQ_SAK_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_FIND_ACC</give_flag></phrase>
-      <phrase id="100"><text>rq_sak_art1_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_art1</precondition><dont_has_flag>RQG_RQ_SAK_ART1_ACC</dont_has_flag><next>200</next></phrase>
-      <phrase id="200"><text>rq_sak_art1_npc</text><next>300</next><next>99</next></phrase>
-      <phrase id="300"><text>rq_sak_art1_accept</text><dont_has_flag>RQG_RQ_SAK_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART1_ACC</give_flag></phrase>
-      <phrase id="101"><text>rq_sak_art2_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_art2</precondition><dont_has_flag>RQG_RQ_SAK_ART2_ACC</dont_has_flag><next>201</next></phrase>
-      <phrase id="201"><text>rq_sak_art2_npc</text><next>301</next><next>99</next></phrase>
-      <phrase id="301"><text>rq_sak_art2_accept</text><dont_has_flag>RQG_RQ_SAK_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART2_ACC</give_flag></phrase>
-      <phrase id="102"><text>rq_sak_art3_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_art3</precondition><dont_has_flag>RQG_RQ_SAK_ART3_ACC</dont_has_flag><next>202</next></phrase>
-      <phrase id="202"><text>rq_sak_art3_npc</text><next>302</next><next>99</next></phrase>
-      <phrase id="302"><text>rq_sak_art3_accept</text><dont_has_flag>RQG_RQ_SAK_ART3_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART3_ACC</give_flag></phrase>
-      <phrase id="103"><text>rq_sak_art4_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_art4</precondition><dont_has_flag>RQG_RQ_SAK_ART4_ACC</dont_has_flag><next>203</next></phrase>
-      <phrase id="203"><text>rq_sak_art4_npc</text><next>303</next><next>99</next></phrase>
-      <phrase id="303"><text>rq_sak_art4_accept</text><dont_has_flag>RQG_RQ_SAK_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART4_ACC</give_flag></phrase>
-      <phrase id="104"><text>rq_sak_art5_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_art5</precondition><dont_has_flag>RQG_RQ_SAK_ART5_ACC</dont_has_flag><next>204</next></phrase>
-      <phrase id="204"><text>rq_sak_art5_npc</text><next>304</next><next>99</next></phrase>
-      <phrase id="304"><text>rq_sak_art5_accept</text><dont_has_flag>RQG_RQ_SAK_ART5_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART5_ACC</give_flag></phrase>
-      <phrase id="105"><text>rq_sak_part1_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_part1</precondition><dont_has_flag>RQG_RQ_SAK_PART1_ACC</dont_has_flag><next>205</next></phrase>
-      <phrase id="205"><text>rq_sak_part1_npc</text><next>305</next><next>99</next></phrase>
-      <phrase id="305"><text>rq_sak_part1_accept</text><dont_has_flag>RQG_RQ_SAK_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART1_ACC</give_flag></phrase>
-      <phrase id="106"><text>rq_sak_part2_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_part2</precondition><dont_has_flag>RQG_RQ_SAK_PART2_ACC</dont_has_flag><next>206</next></phrase>
-      <phrase id="206"><text>rq_sak_part2_npc</text><next>306</next><next>99</next></phrase>
-      <phrase id="306"><text>rq_sak_part2_accept</text><dont_has_flag>RQG_RQ_SAK_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART2_ACC</give_flag></phrase>
-      <phrase id="107"><text>rq_sak_part3_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_part3</precondition><dont_has_flag>RQG_RQ_SAK_PART3_ACC</dont_has_flag><next>207</next></phrase>
-      <phrase id="207"><text>rq_sak_part3_npc</text><next>307</next><next>99</next></phrase>
-      <phrase id="307"><text>rq_sak_part3_accept</text><dont_has_flag>RQG_RQ_SAK_PART3_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART3_ACC</give_flag></phrase>
-      <phrase id="108"><text>rq_sak_part4_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_part4</precondition><dont_has_flag>RQG_RQ_SAK_PART4_ACC</dont_has_flag><next>208</next></phrase>
-      <phrase id="208"><text>rq_sak_part4_npc</text><next>308</next><next>99</next></phrase>
-      <phrase id="308"><text>rq_sak_part4_accept</text><dont_has_flag>RQG_RQ_SAK_PART4_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART4_ACC</give_flag></phrase>
-      <phrase id="109"><text>rq_sak_part5_offer</text><precondition>coop_rq_dialogs.offer_rq_sak_part5</precondition><dont_has_flag>RQG_RQ_SAK_PART5_ACC</dont_has_flag><next>209</next></phrase>
-      <phrase id="209"><text>rq_sak_part5_npc</text><next>309</next><next>99</next></phrase>
-      <phrase id="309"><text>rq_sak_part5_accept</text><dont_has_flag>RQG_RQ_SAK_PART5_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART5_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_187</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_188</action><next>10</next><next>11</next><next>12</next><next>100</next><next>101</next><next>102</next><next>103</next><next>104</next><next>105</next><next>106</next><next>107</next><next>108</next><next>109</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_sak_camp1_offer</text><action>coop_subs_say.sp_189</action><dont_has_flag>RQG_RQ_SAK_CAMP1_ACC</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_sak_camp1_npc</text><action>coop_subs_say.sp_190</action><next>50</next><next>99</next></phrase>
+      <phrase id="50"><text>rq_sak_camp1_accept</text><action>coop_subs_say.sp_191</action><dont_has_flag>RQG_RQ_SAK_CAMP1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_CAMP1_ACC</give_flag></phrase>
+      <phrase id="11"><text>rq_sak_camp2_offer</text><action>coop_subs_say.sp_192</action><dont_has_flag>RQG_RQ_SAK_CAMP2_ACC</dont_has_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_sak_camp2_npc</text><action>coop_subs_say.sp_193</action><next>51</next><next>99</next></phrase>
+      <phrase id="51"><text>rq_sak_camp2_accept</text><action>coop_subs_say.sp_194</action><dont_has_flag>RQG_RQ_SAK_CAMP2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_CAMP2_ACC</give_flag></phrase>
+      <phrase id="12"><text>rq_sak_find_offer</text><action>coop_subs_say.sp_195</action><dont_has_flag>RQG_RQ_SAK_FIND_ACC</dont_has_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_sak_find_npc</text><action>coop_subs_say.sp_196</action><next>52</next><next>99</next></phrase>
+      <phrase id="52"><text>rq_sak_find_accept</text><action>coop_subs_say.sp_197</action><dont_has_flag>RQG_RQ_SAK_FIND_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_FIND_ACC</give_flag></phrase>
+      <phrase id="100"><text>rq_sak_art1_offer</text><action>coop_subs_say.sp_198</action><precondition>coop_rq_dialogs.offer_rq_sak_art1</precondition><dont_has_flag>RQG_RQ_SAK_ART1_ACC</dont_has_flag><next>200</next></phrase>
+      <phrase id="200"><text>rq_sak_art1_npc</text><action>coop_subs_say.sp_199</action><next>300</next><next>99</next></phrase>
+      <phrase id="300"><text>rq_sak_art1_accept</text><action>coop_subs_say.sp_200</action><dont_has_flag>RQG_RQ_SAK_ART1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART1_ACC</give_flag></phrase>
+      <phrase id="101"><text>rq_sak_art2_offer</text><action>coop_subs_say.sp_201</action><precondition>coop_rq_dialogs.offer_rq_sak_art2</precondition><dont_has_flag>RQG_RQ_SAK_ART2_ACC</dont_has_flag><next>201</next></phrase>
+      <phrase id="201"><text>rq_sak_art2_npc</text><action>coop_subs_say.sp_202</action><next>301</next><next>99</next></phrase>
+      <phrase id="301"><text>rq_sak_art2_accept</text><action>coop_subs_say.sp_203</action><dont_has_flag>RQG_RQ_SAK_ART2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART2_ACC</give_flag></phrase>
+      <phrase id="102"><text>rq_sak_art3_offer</text><action>coop_subs_say.sp_204</action><precondition>coop_rq_dialogs.offer_rq_sak_art3</precondition><dont_has_flag>RQG_RQ_SAK_ART3_ACC</dont_has_flag><next>202</next></phrase>
+      <phrase id="202"><text>rq_sak_art3_npc</text><action>coop_subs_say.sp_205</action><next>302</next><next>99</next></phrase>
+      <phrase id="302"><text>rq_sak_art3_accept</text><action>coop_subs_say.sp_206</action><dont_has_flag>RQG_RQ_SAK_ART3_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART3_ACC</give_flag></phrase>
+      <phrase id="103"><text>rq_sak_art4_offer</text><action>coop_subs_say.sp_207</action><precondition>coop_rq_dialogs.offer_rq_sak_art4</precondition><dont_has_flag>RQG_RQ_SAK_ART4_ACC</dont_has_flag><next>203</next></phrase>
+      <phrase id="203"><text>rq_sak_art4_npc</text><action>coop_subs_say.sp_208</action><next>303</next><next>99</next></phrase>
+      <phrase id="303"><text>rq_sak_art4_accept</text><action>coop_subs_say.sp_209</action><dont_has_flag>RQG_RQ_SAK_ART4_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART4_ACC</give_flag></phrase>
+      <phrase id="104"><text>rq_sak_art5_offer</text><action>coop_subs_say.sp_210</action><precondition>coop_rq_dialogs.offer_rq_sak_art5</precondition><dont_has_flag>RQG_RQ_SAK_ART5_ACC</dont_has_flag><next>204</next></phrase>
+      <phrase id="204"><text>rq_sak_art5_npc</text><action>coop_subs_say.sp_211</action><next>304</next><next>99</next></phrase>
+      <phrase id="304"><text>rq_sak_art5_accept</text><action>coop_subs_say.sp_212</action><dont_has_flag>RQG_RQ_SAK_ART5_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_ART5_ACC</give_flag></phrase>
+      <phrase id="105"><text>rq_sak_part1_offer</text><action>coop_subs_say.sp_213</action><precondition>coop_rq_dialogs.offer_rq_sak_part1</precondition><dont_has_flag>RQG_RQ_SAK_PART1_ACC</dont_has_flag><next>205</next></phrase>
+      <phrase id="205"><text>rq_sak_part1_npc</text><action>coop_subs_say.sp_214</action><next>305</next><next>99</next></phrase>
+      <phrase id="305"><text>rq_sak_part1_accept</text><action>coop_subs_say.sp_215</action><dont_has_flag>RQG_RQ_SAK_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART1_ACC</give_flag></phrase>
+      <phrase id="106"><text>rq_sak_part2_offer</text><action>coop_subs_say.sp_216</action><precondition>coop_rq_dialogs.offer_rq_sak_part2</precondition><dont_has_flag>RQG_RQ_SAK_PART2_ACC</dont_has_flag><next>206</next></phrase>
+      <phrase id="206"><text>rq_sak_part2_npc</text><action>coop_subs_say.sp_217</action><next>306</next><next>99</next></phrase>
+      <phrase id="306"><text>rq_sak_part2_accept</text><action>coop_subs_say.sp_218</action><dont_has_flag>RQG_RQ_SAK_PART2_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART2_ACC</give_flag></phrase>
+      <phrase id="107"><text>rq_sak_part3_offer</text><action>coop_subs_say.sp_219</action><precondition>coop_rq_dialogs.offer_rq_sak_part3</precondition><dont_has_flag>RQG_RQ_SAK_PART3_ACC</dont_has_flag><next>207</next></phrase>
+      <phrase id="207"><text>rq_sak_part3_npc</text><action>coop_subs_say.sp_220</action><next>307</next><next>99</next></phrase>
+      <phrase id="307"><text>rq_sak_part3_accept</text><action>coop_subs_say.sp_221</action><dont_has_flag>RQG_RQ_SAK_PART3_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART3_ACC</give_flag></phrase>
+      <phrase id="108"><text>rq_sak_part4_offer</text><action>coop_subs_say.sp_222</action><precondition>coop_rq_dialogs.offer_rq_sak_part4</precondition><dont_has_flag>RQG_RQ_SAK_PART4_ACC</dont_has_flag><next>208</next></phrase>
+      <phrase id="208"><text>rq_sak_part4_npc</text><action>coop_subs_say.sp_223</action><next>308</next><next>99</next></phrase>
+      <phrase id="308"><text>rq_sak_part4_accept</text><action>coop_subs_say.sp_224</action><dont_has_flag>RQG_RQ_SAK_PART4_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART4_ACC</give_flag></phrase>
+      <phrase id="109"><text>rq_sak_part5_offer</text><action>coop_subs_say.sp_225</action><precondition>coop_rq_dialogs.offer_rq_sak_part5</precondition><dont_has_flag>RQG_RQ_SAK_PART5_ACC</dont_has_flag><next>209</next></phrase>
+      <phrase id="209"><text>rq_sak_part5_npc</text><action>coop_subs_say.sp_226</action><next>309</next><next>99</next></phrase>
+      <phrase id="309"><text>rq_sak_part5_accept</text><action>coop_subs_say.sp_227</action><dont_has_flag>RQG_RQ_SAK_PART5_ACC</dont_has_flag><give_flag>RQG_RQ_SAK_PART5_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_228</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_sak_handin">
     <precondition>coop_rq_dialogs.find_open_sak</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin</text><next>5</next></phrase>
-      <phrase id="5"><text>rq_handin_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_sak_find</text><precondition>coop_rq_dialogs.has_rq_detector_simple</precondition><has_flag>RQG_RQ_SAK_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_FIND_FAIL</dont_has_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_handin_ok</text><action>coop_rq_dialogs.take_rq_detector_simple</action><give_flag>RQG_RQ_SAK_FIND_DONE</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin</text><action>coop_subs_say.sp_229</action><next>5</next></phrase>
+      <phrase id="5"><text>rq_handin_ask</text><action>coop_subs_say.sp_230</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_sak_find</text><action>coop_subs_say.sp_231</action><precondition>coop_rq_dialogs.has_rq_detector_simple</precondition><has_flag>RQG_RQ_SAK_FIND_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_FIND_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_FIND_FAIL</dont_has_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_handin_ok</text><action>coop_subs_say.sp_232</action><action>coop_rq_dialogs.take_rq_detector_simple</action><give_flag>RQG_RQ_SAK_FIND_DONE</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_233</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_sid_handin">
     <precondition>coop_rq_dialogs.fetch_open_sid</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin_fetch</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_handin_sid_ask</text><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_sid_art1</text><precondition>coop_rq_dialogs.has_rq_sid_art1</precondition><has_flag>RQG_RQ_SID_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art1</action><give_flag>RQG_RQ_SID_ART1_DONE</give_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_sid_art1_done</text></phrase>
-      <phrase id="11"><text>rq_handin_rq_sid_art2</text><precondition>coop_rq_dialogs.has_rq_sid_art2</precondition><has_flag>RQG_RQ_SID_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art2</action><give_flag>RQG_RQ_SID_ART2_DONE</give_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_sid_art2_done</text></phrase>
-      <phrase id="12"><text>rq_handin_rq_sid_art4</text><precondition>coop_rq_dialogs.has_rq_sid_art4</precondition><has_flag>RQG_RQ_SID_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art4</action><give_flag>RQG_RQ_SID_ART4_DONE</give_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_sid_art4_done</text></phrase>
-      <phrase id="13"><text>rq_handin_rq_sid_part1</text><precondition>coop_rq_dialogs.has_rq_sid_part1</precondition><has_flag>RQG_RQ_SID_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_SID_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_part1</action><give_flag>RQG_RQ_SID_PART1_DONE</give_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_sid_part1_done</text></phrase>
-      <phrase id="14"><text>rq_handin_rq_sid_part2</text><precondition>coop_rq_dialogs.has_rq_sid_part2</precondition><has_flag>RQG_RQ_SID_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_SID_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_part2</action><give_flag>RQG_RQ_SID_PART2_DONE</give_flag><next>34</next></phrase>
-      <phrase id="34"><text>rq_sid_part2_done</text></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin_fetch</text><action>coop_subs_say.sp_234</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_handin_sid_ask</text><action>coop_subs_say.sp_235</action><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_sid_art1</text><action>coop_subs_say.sp_236</action><precondition>coop_rq_dialogs.has_rq_sid_art1</precondition><has_flag>RQG_RQ_SID_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art1</action><give_flag>RQG_RQ_SID_ART1_DONE</give_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_sid_art1_done</text><action>coop_subs_say.sp_237</action></phrase>
+      <phrase id="11"><text>rq_handin_rq_sid_art2</text><action>coop_subs_say.sp_238</action><precondition>coop_rq_dialogs.has_rq_sid_art2</precondition><has_flag>RQG_RQ_SID_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art2</action><give_flag>RQG_RQ_SID_ART2_DONE</give_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_sid_art2_done</text><action>coop_subs_say.sp_239</action></phrase>
+      <phrase id="12"><text>rq_handin_rq_sid_art4</text><action>coop_subs_say.sp_240</action><precondition>coop_rq_dialogs.has_rq_sid_art4</precondition><has_flag>RQG_RQ_SID_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_SID_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_art4</action><give_flag>RQG_RQ_SID_ART4_DONE</give_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_sid_art4_done</text><action>coop_subs_say.sp_241</action></phrase>
+      <phrase id="13"><text>rq_handin_rq_sid_part1</text><action>coop_subs_say.sp_242</action><precondition>coop_rq_dialogs.has_rq_sid_part1</precondition><has_flag>RQG_RQ_SID_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_SID_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_part1</action><give_flag>RQG_RQ_SID_PART1_DONE</give_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_sid_part1_done</text><action>coop_subs_say.sp_243</action></phrase>
+      <phrase id="14"><text>rq_handin_rq_sid_part2</text><action>coop_subs_say.sp_244</action><precondition>coop_rq_dialogs.has_rq_sid_part2</precondition><has_flag>RQG_RQ_SID_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_SID_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SID_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sid_part2</action><give_flag>RQG_RQ_SID_PART2_DONE</give_flag><next>34</next></phrase>
+      <phrase id="34"><text>rq_sid_part2_done</text><action>coop_subs_say.sp_245</action></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_246</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_bar_handin">
     <precondition>coop_rq_dialogs.fetch_open_bar</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin_fetch</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_handin_bar_ask</text><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>16</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_bar_art1</text><precondition>coop_rq_dialogs.has_rq_bar_art1</precondition><has_flag>RQG_RQ_BAR_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art1</action><give_flag>RQG_RQ_BAR_ART1_DONE</give_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_bar_art1_done</text></phrase>
-      <phrase id="11"><text>rq_handin_rq_bar_art2</text><precondition>coop_rq_dialogs.has_rq_bar_art2</precondition><has_flag>RQG_RQ_BAR_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art2</action><give_flag>RQG_RQ_BAR_ART2_DONE</give_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_bar_art2_done</text></phrase>
-      <phrase id="12"><text>rq_handin_rq_bar_art3</text><precondition>coop_rq_dialogs.has_rq_bar_art3</precondition><has_flag>RQG_RQ_BAR_ART3_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art3</action><give_flag>RQG_RQ_BAR_ART3_DONE</give_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_bar_art3_done</text></phrase>
-      <phrase id="13"><text>rq_handin_rq_bar_art4</text><precondition>coop_rq_dialogs.has_rq_bar_art4</precondition><has_flag>RQG_RQ_BAR_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art4</action><give_flag>RQG_RQ_BAR_ART4_DONE</give_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_bar_art4_done</text></phrase>
-      <phrase id="14"><text>rq_handin_rq_bar_art5</text><precondition>coop_rq_dialogs.has_rq_bar_art5</precondition><has_flag>RQG_RQ_BAR_ART5_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art5</action><give_flag>RQG_RQ_BAR_ART5_DONE</give_flag><next>34</next></phrase>
-      <phrase id="34"><text>rq_bar_art5_done</text></phrase>
-      <phrase id="15"><text>rq_handin_rq_bar_part1</text><precondition>coop_rq_dialogs.has_rq_bar_part1</precondition><has_flag>RQG_RQ_BAR_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_part1</action><give_flag>RQG_RQ_BAR_PART1_DONE</give_flag><next>35</next></phrase>
-      <phrase id="35"><text>rq_bar_part1_done</text></phrase>
-      <phrase id="16"><text>rq_handin_rq_bar_part2</text><precondition>coop_rq_dialogs.has_rq_bar_part2</precondition><has_flag>RQG_RQ_BAR_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_part2</action><give_flag>RQG_RQ_BAR_PART2_DONE</give_flag><next>36</next></phrase>
-      <phrase id="36"><text>rq_bar_part2_done</text></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin_fetch</text><action>coop_subs_say.sp_247</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_handin_bar_ask</text><action>coop_subs_say.sp_248</action><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>16</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_bar_art1</text><action>coop_subs_say.sp_249</action><precondition>coop_rq_dialogs.has_rq_bar_art1</precondition><has_flag>RQG_RQ_BAR_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art1</action><give_flag>RQG_RQ_BAR_ART1_DONE</give_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_bar_art1_done</text><action>coop_subs_say.sp_250</action></phrase>
+      <phrase id="11"><text>rq_handin_rq_bar_art2</text><action>coop_subs_say.sp_251</action><precondition>coop_rq_dialogs.has_rq_bar_art2</precondition><has_flag>RQG_RQ_BAR_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art2</action><give_flag>RQG_RQ_BAR_ART2_DONE</give_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_bar_art2_done</text><action>coop_subs_say.sp_252</action></phrase>
+      <phrase id="12"><text>rq_handin_rq_bar_art3</text><action>coop_subs_say.sp_253</action><precondition>coop_rq_dialogs.has_rq_bar_art3</precondition><has_flag>RQG_RQ_BAR_ART3_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art3</action><give_flag>RQG_RQ_BAR_ART3_DONE</give_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_bar_art3_done</text><action>coop_subs_say.sp_254</action></phrase>
+      <phrase id="13"><text>rq_handin_rq_bar_art4</text><action>coop_subs_say.sp_255</action><precondition>coop_rq_dialogs.has_rq_bar_art4</precondition><has_flag>RQG_RQ_BAR_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art4</action><give_flag>RQG_RQ_BAR_ART4_DONE</give_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_bar_art4_done</text><action>coop_subs_say.sp_256</action></phrase>
+      <phrase id="14"><text>rq_handin_rq_bar_art5</text><action>coop_subs_say.sp_257</action><precondition>coop_rq_dialogs.has_rq_bar_art5</precondition><has_flag>RQG_RQ_BAR_ART5_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_ART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_ART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_art5</action><give_flag>RQG_RQ_BAR_ART5_DONE</give_flag><next>34</next></phrase>
+      <phrase id="34"><text>rq_bar_art5_done</text><action>coop_subs_say.sp_258</action></phrase>
+      <phrase id="15"><text>rq_handin_rq_bar_part1</text><action>coop_subs_say.sp_259</action><precondition>coop_rq_dialogs.has_rq_bar_part1</precondition><has_flag>RQG_RQ_BAR_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_part1</action><give_flag>RQG_RQ_BAR_PART1_DONE</give_flag><next>35</next></phrase>
+      <phrase id="35"><text>rq_bar_part1_done</text><action>coop_subs_say.sp_260</action></phrase>
+      <phrase id="16"><text>rq_handin_rq_bar_part2</text><action>coop_subs_say.sp_261</action><precondition>coop_rq_dialogs.has_rq_bar_part2</precondition><has_flag>RQG_RQ_BAR_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_BAR_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_BAR_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_bar_part2</action><give_flag>RQG_RQ_BAR_PART2_DONE</give_flag><next>36</next></phrase>
+      <phrase id="36"><text>rq_bar_part2_done</text><action>coop_subs_say.sp_262</action></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_263</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_sak_fetch_handin">
     <precondition>coop_rq_dialogs.fetch_open_sak</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin_fetch</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_handin_sak_ask</text><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>16</next><next>17</next><next>18</next><next>19</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_sak_art1</text><precondition>coop_rq_dialogs.has_rq_sak_art1</precondition><has_flag>RQG_RQ_SAK_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art1</action><give_flag>RQG_RQ_SAK_ART1_DONE</give_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_sak_art1_done</text></phrase>
-      <phrase id="11"><text>rq_handin_rq_sak_art2</text><precondition>coop_rq_dialogs.has_rq_sak_art2</precondition><has_flag>RQG_RQ_SAK_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art2</action><give_flag>RQG_RQ_SAK_ART2_DONE</give_flag><next>31</next></phrase>
-      <phrase id="31"><text>rq_sak_art2_done</text></phrase>
-      <phrase id="12"><text>rq_handin_rq_sak_art3</text><precondition>coop_rq_dialogs.has_rq_sak_art3</precondition><has_flag>RQG_RQ_SAK_ART3_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art3</action><give_flag>RQG_RQ_SAK_ART3_DONE</give_flag><next>32</next></phrase>
-      <phrase id="32"><text>rq_sak_art3_done</text></phrase>
-      <phrase id="13"><text>rq_handin_rq_sak_art4</text><precondition>coop_rq_dialogs.has_rq_sak_art4</precondition><has_flag>RQG_RQ_SAK_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art4</action><give_flag>RQG_RQ_SAK_ART4_DONE</give_flag><next>33</next></phrase>
-      <phrase id="33"><text>rq_sak_art4_done</text></phrase>
-      <phrase id="14"><text>rq_handin_rq_sak_art5</text><precondition>coop_rq_dialogs.has_rq_sak_art5</precondition><has_flag>RQG_RQ_SAK_ART5_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art5</action><give_flag>RQG_RQ_SAK_ART5_DONE</give_flag><next>34</next></phrase>
-      <phrase id="34"><text>rq_sak_art5_done</text></phrase>
-      <phrase id="15"><text>rq_handin_rq_sak_part1</text><precondition>coop_rq_dialogs.has_rq_sak_part1</precondition><has_flag>RQG_RQ_SAK_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part1</action><give_flag>RQG_RQ_SAK_PART1_DONE</give_flag><next>35</next></phrase>
-      <phrase id="35"><text>rq_sak_part1_done</text></phrase>
-      <phrase id="16"><text>rq_handin_rq_sak_part2</text><precondition>coop_rq_dialogs.has_rq_sak_part2</precondition><has_flag>RQG_RQ_SAK_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part2</action><give_flag>RQG_RQ_SAK_PART2_DONE</give_flag><next>36</next></phrase>
-      <phrase id="36"><text>rq_sak_part2_done</text></phrase>
-      <phrase id="17"><text>rq_handin_rq_sak_part3</text><precondition>coop_rq_dialogs.has_rq_sak_part3</precondition><has_flag>RQG_RQ_SAK_PART3_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part3</action><give_flag>RQG_RQ_SAK_PART3_DONE</give_flag><next>37</next></phrase>
-      <phrase id="37"><text>rq_sak_part3_done</text></phrase>
-      <phrase id="18"><text>rq_handin_rq_sak_part4</text><precondition>coop_rq_dialogs.has_rq_sak_part4</precondition><has_flag>RQG_RQ_SAK_PART4_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part4</action><give_flag>RQG_RQ_SAK_PART4_DONE</give_flag><next>38</next></phrase>
-      <phrase id="38"><text>rq_sak_part4_done</text></phrase>
-      <phrase id="19"><text>rq_handin_rq_sak_part5</text><precondition>coop_rq_dialogs.has_rq_sak_part5</precondition><has_flag>RQG_RQ_SAK_PART5_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part5</action><give_flag>RQG_RQ_SAK_PART5_DONE</give_flag><next>39</next></phrase>
-      <phrase id="39"><text>rq_sak_part5_done</text></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin_fetch</text><action>coop_subs_say.sp_264</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_handin_sak_ask</text><action>coop_subs_say.sp_265</action><next>10</next><next>11</next><next>12</next><next>13</next><next>14</next><next>15</next><next>16</next><next>17</next><next>18</next><next>19</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_sak_art1</text><action>coop_subs_say.sp_266</action><precondition>coop_rq_dialogs.has_rq_sak_art1</precondition><has_flag>RQG_RQ_SAK_ART1_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art1</action><give_flag>RQG_RQ_SAK_ART1_DONE</give_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_sak_art1_done</text><action>coop_subs_say.sp_267</action></phrase>
+      <phrase id="11"><text>rq_handin_rq_sak_art2</text><action>coop_subs_say.sp_268</action><precondition>coop_rq_dialogs.has_rq_sak_art2</precondition><has_flag>RQG_RQ_SAK_ART2_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art2</action><give_flag>RQG_RQ_SAK_ART2_DONE</give_flag><next>31</next></phrase>
+      <phrase id="31"><text>rq_sak_art2_done</text><action>coop_subs_say.sp_269</action></phrase>
+      <phrase id="12"><text>rq_handin_rq_sak_art3</text><action>coop_subs_say.sp_270</action><precondition>coop_rq_dialogs.has_rq_sak_art3</precondition><has_flag>RQG_RQ_SAK_ART3_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art3</action><give_flag>RQG_RQ_SAK_ART3_DONE</give_flag><next>32</next></phrase>
+      <phrase id="32"><text>rq_sak_art3_done</text><action>coop_subs_say.sp_271</action></phrase>
+      <phrase id="13"><text>rq_handin_rq_sak_art4</text><action>coop_subs_say.sp_272</action><precondition>coop_rq_dialogs.has_rq_sak_art4</precondition><has_flag>RQG_RQ_SAK_ART4_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art4</action><give_flag>RQG_RQ_SAK_ART4_DONE</give_flag><next>33</next></phrase>
+      <phrase id="33"><text>rq_sak_art4_done</text><action>coop_subs_say.sp_273</action></phrase>
+      <phrase id="14"><text>rq_handin_rq_sak_art5</text><action>coop_subs_say.sp_274</action><precondition>coop_rq_dialogs.has_rq_sak_art5</precondition><has_flag>RQG_RQ_SAK_ART5_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_ART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_ART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_art5</action><give_flag>RQG_RQ_SAK_ART5_DONE</give_flag><next>34</next></phrase>
+      <phrase id="34"><text>rq_sak_art5_done</text><action>coop_subs_say.sp_275</action></phrase>
+      <phrase id="15"><text>rq_handin_rq_sak_part1</text><action>coop_subs_say.sp_276</action><precondition>coop_rq_dialogs.has_rq_sak_part1</precondition><has_flag>RQG_RQ_SAK_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part1</action><give_flag>RQG_RQ_SAK_PART1_DONE</give_flag><next>35</next></phrase>
+      <phrase id="35"><text>rq_sak_part1_done</text><action>coop_subs_say.sp_277</action></phrase>
+      <phrase id="16"><text>rq_handin_rq_sak_part2</text><action>coop_subs_say.sp_278</action><precondition>coop_rq_dialogs.has_rq_sak_part2</precondition><has_flag>RQG_RQ_SAK_PART2_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART2_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART2_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part2</action><give_flag>RQG_RQ_SAK_PART2_DONE</give_flag><next>36</next></phrase>
+      <phrase id="36"><text>rq_sak_part2_done</text><action>coop_subs_say.sp_279</action></phrase>
+      <phrase id="17"><text>rq_handin_rq_sak_part3</text><action>coop_subs_say.sp_280</action><precondition>coop_rq_dialogs.has_rq_sak_part3</precondition><has_flag>RQG_RQ_SAK_PART3_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART3_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART3_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part3</action><give_flag>RQG_RQ_SAK_PART3_DONE</give_flag><next>37</next></phrase>
+      <phrase id="37"><text>rq_sak_part3_done</text><action>coop_subs_say.sp_281</action></phrase>
+      <phrase id="18"><text>rq_handin_rq_sak_part4</text><action>coop_subs_say.sp_282</action><precondition>coop_rq_dialogs.has_rq_sak_part4</precondition><has_flag>RQG_RQ_SAK_PART4_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART4_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART4_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part4</action><give_flag>RQG_RQ_SAK_PART4_DONE</give_flag><next>38</next></phrase>
+      <phrase id="38"><text>rq_sak_part4_done</text><action>coop_subs_say.sp_283</action></phrase>
+      <phrase id="19"><text>rq_handin_rq_sak_part5</text><action>coop_subs_say.sp_284</action><precondition>coop_rq_dialogs.has_rq_sak_part5</precondition><has_flag>RQG_RQ_SAK_PART5_ACC</has_flag><dont_has_flag>RQG_RQ_SAK_PART5_DONE</dont_has_flag><dont_has_flag>RQG_RQ_SAK_PART5_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_sak_part5</action><give_flag>RQG_RQ_SAK_PART5_DONE</give_flag><next>39</next></phrase>
+      <phrase id="39"><text>rq_sak_part5_done</text><action>coop_subs_say.sp_285</action></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_286</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_fre_dialog">
     <phrase_list>
-      <phrase id="0"><text>rq_ask_work</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_npc_work</text><next>100</next><next>99</next></phrase>
-      <phrase id="100"><text>rq_fre_part1_offer</text><precondition>coop_rq_dialogs.offer_rq_fre_part1</precondition><dont_has_flag>RQG_RQ_FRE_PART1_ACC</dont_has_flag><next>200</next></phrase>
-      <phrase id="200"><text>rq_fre_part1_npc</text><next>300</next><next>99</next></phrase>
-      <phrase id="300"><text>rq_fre_part1_accept</text><dont_has_flag>RQG_RQ_FRE_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_FRE_PART1_ACC</give_flag></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_ask_work</text><action>coop_subs_say.sp_287</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_npc_work</text><action>coop_subs_say.sp_288</action><next>100</next><next>99</next></phrase>
+      <phrase id="100"><text>rq_fre_part1_offer</text><action>coop_subs_say.sp_289</action><precondition>coop_rq_dialogs.offer_rq_fre_part1</precondition><dont_has_flag>RQG_RQ_FRE_PART1_ACC</dont_has_flag><next>200</next></phrase>
+      <phrase id="200"><text>rq_fre_part1_npc</text><action>coop_subs_say.sp_290</action><next>300</next><next>99</next></phrase>
+      <phrase id="300"><text>rq_fre_part1_accept</text><action>coop_subs_say.sp_291</action><dont_has_flag>RQG_RQ_FRE_PART1_ACC</dont_has_flag><give_flag>RQG_RQ_FRE_PART1_ACC</give_flag></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_292</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
   <dialog id="rq_fre_handin">
     <precondition>coop_rq_dialogs.fetch_open_fre</precondition>
     <phrase_list>
-      <phrase id="0"><text>rq_handin_fetch</text><next>1</next></phrase>
-      <phrase id="1"><text>rq_handin_fre_ask</text><next>10</next><next>99</next></phrase>
-      <phrase id="10"><text>rq_handin_rq_fre_part1</text><precondition>coop_rq_dialogs.has_rq_fre_part1</precondition><has_flag>RQG_RQ_FRE_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_FRE_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_FRE_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_fre_part1</action><give_flag>RQG_RQ_FRE_PART1_DONE</give_flag><next>30</next></phrase>
-      <phrase id="30"><text>rq_fre_part1_done</text></phrase>
-      <phrase id="99"><text>rq_not_now</text><action>dialogs.break_dialog</action></phrase>
+      <phrase id="0"><text>rq_handin_fetch</text><action>coop_subs_say.sp_293</action><next>1</next></phrase>
+      <phrase id="1"><text>rq_handin_fre_ask</text><action>coop_subs_say.sp_294</action><next>10</next><next>99</next></phrase>
+      <phrase id="10"><text>rq_handin_rq_fre_part1</text><action>coop_subs_say.sp_295</action><precondition>coop_rq_dialogs.has_rq_fre_part1</precondition><has_flag>RQG_RQ_FRE_PART1_ACC</has_flag><dont_has_flag>RQG_RQ_FRE_PART1_DONE</dont_has_flag><dont_has_flag>RQG_RQ_FRE_PART1_FAIL</dont_has_flag><action>coop_rq_dialogs.pay_rq_fre_part1</action><give_flag>RQG_RQ_FRE_PART1_DONE</give_flag><next>30</next></phrase>
+      <phrase id="30"><text>rq_fre_part1_done</text><action>coop_subs_say.sp_296</action></phrase>
+      <phrase id="99"><text>rq_not_now</text><action>coop_subs_say.sp_297</action><action>dialogs.break_dialog</action></phrase>
     </phrase_list>
   </dialog>
 </game_dialogs>

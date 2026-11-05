@@ -330,11 +330,11 @@
             </phrase>
             <phrase id="11111">
                 <precondition>coop_scn_garbage_duty.case_missing</precondition>
-                <text>gar_duty_pass_i_see</text>
+                <text>gar_duty_pass_i_see</text><action>coop_subs_say.sp_22</action>
                 <next>111111</next>
             </phrase>
             <phrase id="111111">
-                <text>gar_duty_pass_rules</text>
+                <text>gar_duty_pass_rules</text><action>coop_subs_say.sp_23</action>
             </phrase>
             <phrase id="11112">
                 <action>coop_pda_phrases.say__gar_smart_terrain_8_duty_prapor_the_destination_is_a_bar_2</action>
@@ -356,11 +356,11 @@
             <phrase id="1111211">
                 <precondition>coop_scn_garbage_duty.can_pay</precondition>
                 <action>coop_scn_garbage_duty.give_pass_money</action>
-                <text>gar_duty_pass_pay</text>
+                <text>gar_duty_pass_pay</text><action>coop_subs_say.sp_24</action>
                 <next>11112111</next>
             </phrase>
             <phrase id="11112111">
-                <text>gar_duty_pass_paid</text>
+                <text>gar_duty_pass_paid</text><action>coop_subs_say.sp_25</action>
             </phrase>
             <!-- SoC "What's the favor?": kill the boars, the passage is paid (the wave is the one of the Duty zone; the pass comes with a won wave, patch garbage_duty) -->
             <phrase id="1111212">
@@ -386,11 +386,11 @@
             </phrase>
             <phrase id="111122">
                 <precondition>coop_scn_garbage_duty.cannot_pay</precondition>
-                <text>gar_duty_pass_no_money</text>
+                <text>gar_duty_pass_no_money</text><action>coop_subs_say.sp_26</action>
                 <next>111123</next>
             </phrase>
             <phrase id="111123">
-                <text>gar_duty_pass_no_pass</text>
+                <text>gar_duty_pass_no_pass</text><action>coop_subs_say.sp_27</action>
             </phrase>
             <phrase id="3">
                 <precondition>coop_scn_garbage_duty.pass_open</precondition>
@@ -398,7 +398,7 @@
                 <next>33</next>
             </phrase>
             <phrase id="33">
-                <text>gar_duty_pass_say_hi</text>
+                <text>gar_duty_pass_say_hi</text><action>coop_subs_say.sp_28</action>
             </phrase>
         </phrase_list>
     </dialog>

@@ -30,3 +30,9 @@ When an NPC talks to a player, the phrase text did not appear as a subtitle: the
 now also wraps two functions of the mod's PDA sync (`coop_pda_archive_sync`): `emit_phrase` (runs on the player who talks) shows the phrase as a bottom subtitle, and
 `apply_news` (runs on the other players, news_type 1 = dialog phrase, caption = speaker name) shows "Speaker: text". Both retry once a second until the sync script is loaded.
 Written offline, not yet seen in game (a bottom subtitle is a HUD static, so it may stay hidden while the dialog window itself is open).
+
+## Dialog phrases of our own patches (2026-11-05)
+Phrases of the stock dialogs carry a generated hook (`coop_pda_phrases.say__<id>`), the SoC patches have their own generated `coop_soc_*_say` scripts. Our other dialog files had no hook
+at all, so those phrases never reached the bottom subtitle or the other players: the repeatable quests (every quest giver, 269 phrases), Garbage duty (7), Military (16), Mole (3), Monolith (2).
+`tools\gen_subs_say.py` adds `<action>coop_subs_say.sp_<n></action>` after the `<text>` of each such phrase and writes `scripts\coop_subs_say.script` (297 functions, same helper calls as the
+other say scripts; the speaker is derived from the depth in the phrase tree). Safe to run again. All 297 phrases have English text. Not yet run in the game.
