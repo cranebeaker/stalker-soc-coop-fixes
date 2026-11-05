@@ -1,0 +1,4 @@
+New in v1.5.8
+
+- @arena_stragglers: the Bar arena can be fought again and again. After a fight, two parts of the arena logic could get stuck waiting for the same "squad dead" signal (the intro cut-scene and the spawner of the next squad), so the next fight could start without its enemies. They are now reset when a fight ends. As in 1.5.7, a fight no longer hangs on the last one or two mutants
+- Everybody has to install v1.5.8 (the add-on fingerprint changes). Saves of v1.5.7 keep working

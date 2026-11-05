@@ -1,12 +1,16 @@
 -------------------------------------------------------------------------------------------------------
--- Bar arena (Arnie): a fight can no longer hang on the last one or two mutants (patch arena_stragglers, see its NOTES.md).
+-- Bar arena (Arnie): a fight can no longer hang on the last mutants, and it cleans up after itself (patch arena_stragglers, see its NOTES.md).
 -- The file name starts with coop_scn_ so that the Scene Director (cutscenes_core) loads it on every level; it only installs a server tick.
 --
--- The arena fight ends when the WHOLE mutant squad is dead (squad on_death -> ..._SQUAD_DEAD flag -> the stop restrictor takes the players out).
--- With more players the player scaling adds members to the squad (8 bloodsuckers became 12 with two players), and weak bloodsuckers are
--- invisible most of the time, so "I killed everything" often left one or two alive somewhere and nothing happened.
--- The scaling stays. This tick watches the arena squads: when at most STRAGGLERS members are alive and no member has died for STALL_MS,
--- the remaining ones are killed, which sends the normal squad death (flags, teleport out, reward) down the stock path.
+-- 1. STRAGGLERS. The arena fight ends when the WHOLE mutant squad is dead (squad on_death -> ..._SQUAD_DEAD flag -> the stop restrictor takes the
+--    players out). With more players the player scaling adds members to the squad (8 bloodsuckers became 12 with two players), and weak
+--    bloodsuckers are invisible most of the time, so "I killed everything" often left one or two alive somewhere and nothing happened.
+--    The scaling stays. When at most STRAGGLERS members are alive and no member has died for STALL_MS, the remaining ones are killed, which
+--    sends the normal squad death (flags, teleport out, reward) down the stock path.
+-- 2. CLEAN-UP. The cut-scene restrictor of the arena clears START_CAT_SCENE_INFO / START_ARENA_GO and goes back to its start state only when it
+--    sees a ..._SQUAD_DEAD flag, but the stop restrictors remove that flag in the same moment, so depending on the update order the two flags
+--    stayed set and the restrictor kept waiting (the intro cut-scene of the next fight was skipped). CLEANUP_MS after the squad is gone this tick
+--    removes both flags and puts the restrictor back to sr_idle@idle_start_cat_scene.
 -------------------------------------------------------------------------------------------------------
 
 local MAP = "coop_l05_bar"
@@ -18,11 +22,28 @@ local SQUADS = {
 }
 local STRAGGLERS = 2        -- at most this many alive
 local STALL_MS   = 60000    -- nobody died for this long
+local CLEANUP_MS = 8000     -- after the squad is gone: the stop restrictor has taken the players out by then
 local GO_FLAG    = "BAR_ARNY_ARENA_SMART_TERRAIN_START_ARENA_GO"
+local CAT_FLAG   = "BAR_ARNY_ARENA_SMART_TERRAIN_START_CAT_SCENE_INFO"
+-- flags a finished fight leaves behind when the restrictors below miss the dead flag: the squad spawn flags and the two above
+local STALE_FLAGS = {
+	GO_FLAG, CAT_FLAG,
+	"BAR_ARNY_ARENA_SMART_TERRAIN_SPAWN_DOG_ARENA_INFO",
+	"BAR_ARNY_ARENA_SMART_TERRAIN_SPAWN_PSEUDODOG_ARENA_INFO",
+	"BAR_ARNY_ARENA_SMART_TERRAIN_SPAWN_BOAR_ARENA_INFO",
+	"BAR_ARNY_ARENA_SMART_TERRAIN_SPAWN_BLOODSUCKER_ARENA_INFO",
+}
+-- restrictors that wait for a ..._SQUAD_DEAD flag to return to their start state; the stop restrictors consume that flag, so one of them can miss it
+local RESTRICTORS = {
+	{ zone = "bar_actor_cat_scene_space_restrictor",                 start = "sr_idle@idle_start_cat_scene" },
+	{ zone = "bar_arny_arena_smart_terrain_spawn_squad_space_restrictor", start = "sr_idle@start_arena_idle" },
+}
 
 local gen = 0
 local watch = {}            -- squad story name -> { alive = n, since = ms }
 local t_srv = 0
+local fight_seen = false    -- a normal arena squad existed while the arena flag was set
+local cleanup_at = nil
 
 local function qlog(s)
 	pcall(printf_msg, "%s", "ARENA " .. tostring(s))
@@ -58,42 +79,79 @@ local function members_state(se)
 	return alive_online, offline
 end
 
+-- returns true while the squad exists
 local function check_squad(name, now)
 	local sid = get_story_object_id(name)
 	local se = sid and alife():object(sid)
 	if se == nil then
 		watch[name] = nil
-		return
+		return false
 	end
 	local alive_online, offline = members_state(se)
 	local n = #alive_online + offline
 	local w = watch[name]
 	if w == nil or n ~= w.alive then
 		watch[name] = { alive = n, since = now }
-		return
+		return true
 	end
 	-- unchanged: nothing died since w.since
-	if offline > 0 or n == 0 or n > STRAGGLERS then return end
-	if now - w.since < STALL_MS then return end
+	if offline > 0 or n == 0 or n > STRAGGLERS then return true end
+	if now - w.since < STALL_MS then return true end
 	qlog(string.format("%s: %d left and no kill for %d s: finishing the squad", name, n, math.floor((now - w.since) / 1000)))
 	local killer = any_player()
 	for _, o in ipairs(alive_online) do
 		pcall(function() o:kill(killer or o) end)
 	end
 	watch[name] = nil
+	return true
+end
+
+-- puts the restrictor back to its start state if it is anywhere else; returns a short text for the log
+local function reset_restrictor(r)
+	local z = db.zone_by_name and db.zone_by_name[r.zone]
+	if z == nil then return r.zone .. " not online" end
+	local st = db.storage[z:id()]
+	if st == nil or st.ini == nil then return r.zone .. " has no logic" end
+	local was = st.active_section
+	if was == r.start then return r.zone .. " ok" end
+	local ok, res = pcall(xr_logic.switch_to_section, z, st.ini, r.start)
+	return ok and (r.zone .. " reset (was " .. tostring(was) .. ")") or (r.zone .. " reset failed " .. tostring(res))
+end
+
+local function cleanup()
+	for _, f in ipairs(STALE_FLAGS) do pcall(story_flags.disable_flag, f) end
+	local parts = {}
+	for _, r in ipairs(RESTRICTORS) do parts[#parts + 1] = reset_restrictor(r) end
+	qlog("fight over: flags cleared, " .. table.concat(parts, ", "))
 end
 
 local function tick_server(now)
 	if now - t_srv < 1000 then return end
 	t_srv = now
 	if level.name() ~= MAP then return end
-	if not has(GO_FLAG) then
+	local go = has(GO_FLAG)
+	if not go and not fight_seen then
 		watch = {}
 		return
 	end
+	local exists = false
 	for _, name in ipairs(SQUADS) do
-		local ok, err = pcall(check_squad, name, now)
-		if not ok then qlog("CHECKERR " .. name .. " " .. tostring(err)) end
+		local ok, e = pcall(check_squad, name, now)
+		if not ok then qlog("CHECKERR " .. name .. " " .. tostring(e)) elseif e then exists = true end
+	end
+	if exists then
+		if go then fight_seen = true end
+		cleanup_at = nil
+		return
+	end
+	-- no arena squad any more
+	if fight_seen then
+		if cleanup_at == nil then
+			cleanup_at = now + CLEANUP_MS
+		elseif now >= cleanup_at then
+			fight_seen, cleanup_at = false, nil
+			cleanup()
+		end
 	end
 end
 
