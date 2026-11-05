@@ -15,5 +15,8 @@ When at most 2 are alive, all of them are online, and nobody has died for 60 sec
 the normal way: flags, teleport out, reward dialog. The timed fights ("during the time") are not touched. The log line `ARENA <squad>: n left and no kill for
 60 s: finishing the squad` shows when it fired.
 
-Checked with the live console: with the real squad (8 members) killing all of them ended the fight (`..._SQUAD_DEAD_FAIL` set, arena go flag cleared). The tick itself
-was written offline (parsed with a Lua parser) and has not been run in a full session.
+Tested with the live console on the release build (two players simulated with the scaling test count): the bloodsucker squad had 12 members, 10 were
+killed, 2 stayed alive; 60 seconds later the log showed `ARENA ...: 2 left and no kill for 60 s: finishing the squad`, the squad died the normal way (`..._SQUAD_DEAD`
+and `..._SQUAD_DEAD_FAIL` set, the stop restrictor consumed the dead flag) and the player was moved to the arena exit point. With the real 8-member squad (one player) killing
+all members also ended the fight. Not checked: a full session with two real clients. After a fight ended this way the flags `START_ARENA_GO` and `START_CAT_SCENE_INFO`
+stayed set (the cutscene restrictor only clears them when it sees the dead flag before the stop restrictor consumes it); the next fight still starts.
