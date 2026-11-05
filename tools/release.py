@@ -188,7 +188,7 @@ def step_escapes(skip, rep):
 
 
 # ---------------------------------------------------------------------------------------------------------- 3 build
-def step_build(skip, out_dir, rep, dry=False, version=None):
+def step_build(skip, out_dir, rep, dry=False, version=None, player_limit=None):
     t = time.time()
     stage = os.path.join(out_dir, "stage")
     db = os.path.join(out_dir, "zzz_soc_coop_fixes.db")
@@ -196,7 +196,13 @@ def step_build(skip, out_dir, rep, dry=False, version=None):
     if os.path.exists(db):
         os.remove(db)
     os.makedirs(stage, exist_ok=True)
-    rc, out = py(os.path.join(REPO, "build.py"), db, "--skip=" + ",".join(skip) if skip else "--skip=", "--stage=" + stage, "--no-budget-check", cwd=REPO)   # step_budget below does the 4 GiB check
+    args = [os.path.join(REPO, "build.py"), db, "--skip=" + ",".join(skip) if skip else "--skip=", "--stage=" + stage, "--no-budget-check"]
+    if player_limit == 8:
+        profile = os.path.join(out_dir, "coop_player_limit_profile.json")
+        if os.path.exists(profile):
+            os.remove(profile)
+        args.extend(["--player-limit", "8"])
+    rc, out = py(*args, cwd=REPO)   # step_budget below does the 4 GiB check
     if rc != 0 or not os.path.exists(db):
         rep.add("build", "FAIL", time.time() - t, "build.py exit %d: %s" % (rc, out.strip()[-300:]))
         return None
@@ -554,29 +560,64 @@ INSTALL_BAT = ("@echo off\r\n"
                "pause\r\n")
 
 
-def step_package(version, db, skip, out_dir, rep, dry):
+def step_package(version, db, skip, out_dir, rep, dry, player_limit=None):
     t = time.time()
-    name = "SoC_COOP_fixes_v" + version
+    extra = []
+    if player_limit == 8:
+        try:
+            sys.path.insert(0, HERE)
+            from start_coop_server import load_profile, _file_sha256
+            from pathlib import Path
+            profile = Path(db).with_name("coop_player_limit_profile.json")
+            parsed = load_profile(profile)
+            if parsed["patch_db"]["size"] != os.path.getsize(db) or parsed["patch_db"]["sha256"] != _file_sha256(Path(db)):
+                raise ValueError("built DB size/SHA256 does not match capacity profile")
+        except (OSError, ValueError) as error:
+            rep.add("package", "FAIL", time.time() - t, str(error))
+            return None
+        extra = [
+            (str(profile), "coop_player_limit_profile.json"),
+            (os.path.join(REPO, "installer", "player_limit.ps1"), "installer/player_limit.ps1"),
+            (os.path.join(REPO, "installer", "start_server_1_8.ps1"), "installer/start_server_1_8.ps1"),
+            (os.path.join(REPO, "installer", "start_server_1_8.bat"), "Start-Server-1-8.bat"),
+            (os.path.join(HERE, "start_coop_server.py"), "tools/start_coop_server.py"),
+            (os.path.join(HERE, "patch_coop_player_limit.py"), "tools/patch_coop_player_limit.py"),
+            (os.path.join(REPO, "docs", "PLAYER_LIMIT_8.en.md"), "PLAYER_LIMIT_8.en.md"),
+            (os.path.join(REPO, "docs", "PLAYER_LIMIT_8.ru.md"), "PLAYER_LIMIT_8.ru.md"),
+        ]
+    name = "SoC_COOP_fixes_v" + version + ("_players8" if player_limit == 8 else "")
     folder = os.path.join(out_dir, name)
     shutil.rmtree(folder, ignore_errors=True)
     os.makedirs(os.path.join(folder, "installer"))
     readme, how = make_readme(version, skip)
+    if player_limit == 8:
+        readme = ("OPT-IN capacity 8 / ОПЦИОНАЛЬНЫЙ РЕЖИМ 8\n"
+                  "Read PLAYER_LIMIT_8.en.md / PLAYER_LIMIT_8.ru.md before installing.\n"
+                  "Exact addon 8.1 x86 DLL only; all players need this same package.\n"
+                  "Install patches local DLLs and keeps verified originals; no DLL is shipped.\n"
+                  "Host: Start-Server-1-8.bat (PowerShell) or tools/start_coop_server.py (Python 3.10+).\n\n" + readme)
     with open(os.path.join(folder, "README.txt"), "wb") as f:
         f.write(b"\xef\xbb\xbf" + readme.encode("utf-8")) if False else f.write(readme.encode("utf-8"))
     shutil.copyfile(db, os.path.join(folder, "zzz_soc_coop_fixes.db"))
     shutil.copyfile(os.path.join(REPO, "installer", "install.ps1"), os.path.join(folder, "installer", "install.ps1"))
     with open(os.path.join(folder, "installer", "install.bat"), "wb") as f:
         f.write(INSTALL_BAT.encode("ascii"))
+    inventory = ["README.txt", "zzz_soc_coop_fixes.db", "installer/install.bat", "installer/install.ps1"]
+    for source, relative in extra:
+        destination = os.path.join(folder, *relative.split("/"))
+        os.makedirs(os.path.dirname(destination), exist_ok=True)
+        shutil.copyfile(source, destination)
+        inventory.append(relative)
     zpath = os.path.join(out_dir, name + ".zip")
     if os.path.exists(zpath):
         os.remove(zpath)
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
-        for rel in ("README.txt", "zzz_soc_coop_fixes.db", os.path.join("installer", "install.bat"), os.path.join("installer", "install.ps1")):
+        for rel in inventory:
             z.write(os.path.join(folder, rel), rel.replace(os.sep, "/"))
     with zipfile.ZipFile(zpath) as z:
         bad = z.testzip()
         names = sorted(z.namelist())
-    if bad or names != sorted(["README.txt", "zzz_soc_coop_fixes.db", "installer/install.bat", "installer/install.ps1"]):
+    if bad or names != sorted(inventory):
         rep.add("package", "FAIL", time.time() - t, "zip check failed: %s %s" % (bad, names))
         return None
     rep.add("package", "PASS", time.time() - t, "%s (%.1f MB), README change list: %s" % (os.path.basename(zpath), os.path.getsize(zpath) / 2**20, how))
@@ -663,8 +704,28 @@ def installer_limit_test(folder):
         shutil.rmtree(tmp, ignore_errors=True)
 
 
-def step_installer(folder, rep):
+def step_installer(folder, rep, player_limit=None):
     t = time.time()
+    if player_limit == 8:
+        env = os.environ.copy()
+        ps = env.get("COOP_PWSH") or shutil.which("powershell") or shutil.which("pwsh")
+        dll = env.get("COOP_TEST_DLL")
+        if not dll:
+            for relative in ("bin/xrGame.dll.cap8-original", "bin/xrGame.dll"):
+                candidate = os.path.join(GAME_DIR, relative)
+                if os.path.isfile(candidate):
+                    dll = candidate
+                    break
+        if not ps or not dll or not os.path.isfile(dll):
+            rep.add("installer", "FAIL", time.time() - t, "capacity 8 self-test requires PowerShell (COOP_PWSH) and original supported COOP_TEST_DLL; no game is executed")
+            return False
+        env.update(COOP_PWSH=ps, COOP_TEST_DLL=dll, COOP_INSTALLER_ROOT=folder)
+        rc, output = py("-m", "unittest", "discover", "-s", os.path.join(REPO, "tests"), "-p", "test_coop_player_installer.py", "-v", env=env, timeout=600)
+        # Required runtime/DLL prerequisites were checked above. Directory
+        # symlink creation can legitimately be unavailable to a Windows user.
+        ok = rc == 0
+        rep.add("installer", "PASS" if ok else "FAIL", time.time() - t, "capacity 8 synthetic addon + official local DLL, backups/idempotence/refusal/rollback; " + output[-1000:])
+        return ok
     import tarfile
     tmp = tempfile.mkdtemp(prefix="relinst_")
     try:
@@ -716,6 +777,7 @@ def main():
     ap.add_argument("--min-free-ram-gb", type=float, default=MIN_FREE_RAM_GB, help="wait before each launch until this much RAM is free (default %.1f)" % MIN_FREE_RAM_GB)
     ap.add_argument("--no-boot", action="store_true", help="skip step 4 entirely")
     ap.add_argument("--no-installer-test", action="store_true")
+    ap.add_argument("--player-limit", type=int, choices=[8], help="opt-in capacity 8 package; standard release is unchanged")
     a = ap.parse_args()
     globals()["MIN_FREE_RAM_GB"] = a.min_free_ram_gb
 
@@ -724,7 +786,9 @@ def main():
         return 2
     skip = DEFAULT_SKIP if a.skip is None else ([] if a.skip.strip().lower() in ("none", "") else [s.strip() for s in a.skip.split(",") if s.strip()])
     pdir = os.path.join(REPO, "patches")
-    unknown = [s for s in skip if not os.path.isdir(os.path.join(pdir, s))]
+    # Historical defaults can outlive a retired patch folder (soc_levels).
+    # Explicit user input still gets typo validation; absent defaults skip nothing.
+    unknown = [s for s in skip if not os.path.isdir(os.path.join(pdir, s))] if a.skip is not None else []
     if unknown:
         print("unknown patch folder(s) in --skip: %s" % ", ".join(unknown))
         return 2
@@ -736,7 +800,7 @@ def main():
         if bad:
             print("unknown level(s): %s (known: %s)" % (", ".join(bad), ", ".join(ALL_LEVELS)))
             return 2
-    out_dir = os.path.abspath(a.out or os.path.join(REPO, "build", "release_v" + a.version))
+    out_dir = os.path.abspath(a.out or os.path.join(REPO, "build", "release_v" + a.version + ("_players8" if a.player_limit == 8 else "")))
     os.makedirs(out_dir, exist_ok=True)
     if free_gb(out_dir) < 1:
         print("less than 1 GB free in %s: stopping" % out_dir)
@@ -751,7 +815,7 @@ def main():
         rep.add("stop", "FAIL", 0, "offline checks failed; not building a release from this tree")
         finish(rep, a, out_dir, mode, skip, levels, None)
         return 1
-    built = step_build(skip, out_dir, rep, a.dry_run, a.version)
+    built = step_build(skip, out_dir, rep, a.dry_run, a.version, player_limit=a.player_limit)
     if built is None:
         finish(rep, a, out_dir, mode, skip, levels, None)
         return 1
@@ -766,10 +830,10 @@ def main():
         if not a.dry_run and free_gb(GAME_DIR if os.path.isdir(GAME_DIR) else out_dir) < a.min_free_gb:
             print("note: less than %.0f GB free; each launch will wait for space (rule: keep %.0f GB free)" % (a.min_free_gb, a.min_free_gb), flush=True)
         boot_ok, boot_results = step_boot(levels, stage, out_dir, a.owner, a.soak, a.min_free_gb, a.parallel, a.dry_run, rep)
-    pk = step_package(a.version, db, skip, out_dir, rep, a.dry_run)
+    pk = step_package(a.version, db, skip, out_dir, rep, a.dry_run, player_limit=a.player_limit)
     inst_ok = True
     if pk is not None and not a.no_installer_test:
-        inst_ok = step_installer(pk[0], rep)
+        inst_ok = step_installer(pk[0], rep, player_limit=a.player_limit)
     elif pk is None:
         inst_ok = False
     finish(rep, a, out_dir, mode, skip, levels, pk)

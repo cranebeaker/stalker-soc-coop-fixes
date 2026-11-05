@@ -158,6 +158,40 @@ if (-not $Uninstall) {
 }
 Write-Host "coop.addon: $Addon"
 
+# Only an opt-in package carries this JSON. Ordinary installer packages keep
+# their original DB-only path and do not load the capacity-8 library.
+$profileFolder = if ($Db) { Split-Path -Parent ([IO.Path]::GetFullPath($Db)) } else { Split-Path -Parent $Here }
+$packageProfile = Join-Path $profileFolder 'coop_player_limit_profile.json'
+if (Test-Path -LiteralPath $packageProfile) {
+    $library = Join-Path $Here 'player_limit.ps1'
+    if (-not [IO.File]::Exists($library)) { throw 'Capacity profile present but player_limit.ps1 is missing' }
+    . $library
+    [void](Read-CoopProfile $packageProfile)
+    $game = Split-Path -Parent (Split-Path -Parent $Addon)
+    $canonicalAddon = [IO.Path]::GetFullPath((Join-Path $game 'addons/coop.addon'))
+    if ([IO.Path]::GetFullPath($Addon) -ine $canonicalAddon) {
+        throw 'Capacity 8 requires the canonical game/addons/coop.addon; alternate addon filenames are refused without changes.'
+    }
+    if ($Uninstall) { Restore-CoopPlayerLimit -GamePath $game }
+    else { Install-CoopPlayerLimit -GamePath $game -Db $Db -ProfilePath $packageProfile }
+    exit 0
+}
+
+# A DB-only package cannot downgrade capacity 8 safely: replacing/removing its
+# data while leaving the patched DLL would break the fixed-size lobby arrays.
+$game = Split-Path -Parent (Split-Path -Parent $Addon)
+$installedProfile = Join-Path $game 'coop_player_limit_profile.json'
+if (Test-Path -LiteralPath $installedProfile) {
+    throw 'Capacity 8 is installed. Restore it with the original opt-in package: install.bat -Uninstall; then install the standard package. / Сначала восстановите исходники установщиком режима 8.'
+}
+foreach ($relative in @('bin/xrGame.dll', 'bin/dedicated/xrGame.dll')) {
+    $dll = Join-Path $game $relative
+    if ([IO.File]::Exists($dll) -and
+        (Get-FileHash -LiteralPath $dll -Algorithm SHA256).Hash -ieq 'de8e7b892203abc0e7a667b1a56ad0844140f02a82461e8432edc6a3150f2860') {
+        throw 'Patched capacity 8 DLL found without an opt-in package. Restore verified original DLLs and addon with that package before using the standard installer.'
+    }
+}
+
 try {
     $fs = [System.IO.File]::Open($Addon, [System.IO.FileMode]::Open, [System.IO.FileAccess]::ReadWrite, [System.IO.FileShare]::None)
 } catch {
