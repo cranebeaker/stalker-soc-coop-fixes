@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "path": "levels/coop_l01_escape/level.game",
+      "sha256": "f31950dae6b19d84a58ca8d3f0c8261f71ed21e76d0644224f3645a75c4625bc",
+      "stage_sha256": "86d6c5594f4eef8d32deb9a54ecfc2532db05f86191e70629144417908e2aa6e"
+    },
+    {
+      "path": "levels/coop_l02_garbage/level.game",
+      "sha256": "9d06195a78440f29ab05b7d0fa8e8fdfe66e106d1790125147971168f9093379",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l03_agroprom/level.game",
+      "sha256": "7e98f35ddaf7df3347f42b862a95984b194b8f13aff3bcdedbc7c50ab5f5c9aa",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l03_agroprom_underground/level.game",
+      "sha256": "2b16c8b3b9ad39b610b928e538faec04620d893ffe92718ccca3f2e3465d59eb",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l04_darkvalley/level.game",
+      "sha256": "8da6b8be8715f39b2a46c146048b0e47aa3b98faf7f00ba4c4f28fbefbbfc95f",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l04_x18/level.game",
+      "sha256": "6513f79523096d8015d9dc43d45fa140e7e0d813d8607d8f73ded76252fce39c",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l05_bar/level.game",
+      "sha256": "fb6bd3f7e0828965d96646d9be67e4d34284a64a06e49bcc8ac0d6ecb29f06f5",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l06_rostok/level.game",
+      "sha256": "3796de5f4796380d4120221c8542b3d490a88081bbd1cb806fa5119dfae8761d",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l07_military/level.game",
+      "sha256": "b716d3c1df84ac133b36ce9f139fa74e135cfd825c68d48df7abd4d1ac72c916",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l08_x16/level.game",
+      "sha256": "6f55c0ccf6a59fb937467485b5195977ad9c87d575b7a35dcc89d9dc312e5924",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l08_yantar/level.game",
+      "sha256": "5dbf6e98febb6c199dbcf49220d6ef145c3cf47aab429b8680f408486afdfb8f",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l09_radar/level.game",
+      "sha256": "8ff949f4127a98198f5033b6caa01d12bcccc1393db0c0620b8a1d8f20128169",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l09_x10/level.game",
+      "sha256": "7ccaeba0eac10b3e03ca6243cadec9241203725030f3787c683e53bad43baa27",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l10_pripyat/level.game",
+      "sha256": "d900209c90d0b6273e6581a6113c9c0616683e60371f15f27f80f0078cbf22dd",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l11_control_monolith/level.game",
+      "sha256": "84d2a22f70f00038fc0ef0cec144ec0a991ef89e20026677c58f4fb99097e20b",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l11_sarcofag/level.game",
+      "sha256": "ec9b334854599935e63516900a5904e8983b4bda4b52ebf75afb1e95b4bc6153",
+      "stage_sha256": "419a6d1389f5b0cc6e10bd4f7a34cf81985627eea869cb858960eab7d2826c16"
+    },
+    {
+      "path": "levels/coop_l11_stancia_1/level.game",
+      "sha256": "7cb9423dce455913da092fc8b73741e92a3b03178294c69bd773267ffa07e3fd",
+      "stage_sha256": null
+    },
+    {
+      "path": "levels/coop_l11_stancia_2/level.game",
+      "sha256": "3ad7c4757a382ea41fb506e62412f8e7a85b2691f922f2aab9a5c601cffeacc2",
+      "stage_sha256": null
+    },
+    {
+      "path": "configs/ui/coop_lobby_wnd.xml",
+      "sha256": "abef6ef87d2122a8bb1bb8c0cf610f79224293b863687ed35cc3edef239bf3a3",
+      "stage_sha256": null
+    }
+  ]
+}

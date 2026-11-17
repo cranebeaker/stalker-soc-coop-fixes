@@ -47,6 +47,27 @@ python -I tools\release.py 1.4.4 --no-boot
 
 Установка на свой ПК: `build\release_v<версия>\SoC_COOP_fixes_v<версия>\installer\install.bat`. В конце печатается отпечаток (fingerprint): он должен совпадать у всех игроков, иначе «другая версия» при подключении.
 
+Опциональная ёмкость 8 собирается командой `python build.py --player-limit 8`
+из файлов репозитория, без отдельного игрового архива и путей `work/`.
+Для пакета используйте `python tools/release.py 1.4.7 --player-limit 8 --no-boot`:
+результат попадает в отдельный каталог и ZIP с суффиксом `_players8`.
+Обычная сборка/упаковка сохраняет прежнее поведение. В пакете режима 8 есть
+`coop_player_limit_profile.json` с фактическим SHA256 DB, PowerShell-установщик,
+выбор лимита сессии 1–8 и инструкции [RU](docs/PLAYER_LIMIT_8.ru.md)/[EN](docs/PLAYER_LIMIT_8.en.md).
+Установщик проверяет единственный поддерживаемый fingerprint DLL и обе сигнатуры,
+сохраняет проверяемые исходники, публикует addon раньше DLL и откатывает частичные
+изменения при ошибке. DLL целиком в исходниках/релизе нет; Windows не требует Python.
+
+Проверки Python: `python -m unittest discover -s tests -p "test_*.py"`.
+К новым контрактам относятся `test_coop_player_limit_build.py` (опциональный stage),
+`test_coop_release.py` (обычный/opt-in ZIP), `test_start_coop_server.py` (профиль,
+hash/order, prefix и argv) и `test_coop_player_installer.py` (настоящие PowerShell/.NET
+на копиях DLL и синтетическом tar: отказ, установка, повтор и откат).
+Для исполнения последнего задайте `COOP_TEST_DLL` на исходную поддерживаемую DLL,
+а при необходимости `COOP_PWSH` на интерпретатор. Без них тесты явно пропускаются;
+релиз режима 8 требует эту проверку либо явный `--no-installer-test`.
+Такое пропускание и отсутствие игровых boot-проверок нужно отражать в отчёте.
+
 ## 3. Проверки (быстро, без игры)
 
 | Команда | Что ловит |

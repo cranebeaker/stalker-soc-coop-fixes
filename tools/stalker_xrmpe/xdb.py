@@ -94,9 +94,14 @@ def lzhuf_decode(src,outsize):
                 c=text[(i+k)&(N-1)];out.append(c);text[r]=c;r=(r+1)&(N-1)
     return bytes(out[:outsize])
 
-def lzo1x(src,outlen):
+def lzo1x(src,outlen,*,max_output=None):
     # minimal lzo1x decompressor
+    # Опциональный предел проверяется ДО роста output; старые callers без него
+    # сохраняют прежнюю семантику (outlen исторически не ограничивал декодер).
     out=bytearray();ip=0;n=len(src)
+    def check_output(extra):
+        if max_output is not None and len(out)+extra>max_output:
+            raise ValueError('LZO output exceeds max_output')
     def mlen(base,mask_bits):
         nonlocal ip
         t=base
@@ -107,7 +112,7 @@ def lzo1x(src,outlen):
     t=src[ip]
     state=0
     if t>17:
-        ip+=1;t-=17;out+=src[ip:ip+t];ip+=t;state=4 if t>=4 else t
+        ip+=1;t-=17;check_output(t);out+=src[ip:ip+t];ip+=t;state=4 if t>=4 else t
     while True:
         t=src[ip];ip+=1
         if t>=64:
@@ -137,12 +142,14 @@ def lzo1x(src,outlen):
                     while src[ip]==0: ln+=255;ip+=1
                     ln+=15+src[ip];ip+=1
                 ln+=3
+                check_output(ln)
                 out+=src[ip:ip+ln];ip+=ln;state=4;continue
             elif state==4:
                 dist=(t>>2)+(src[ip]<<2)+2049;ip+=1;ln=3;st=t&3
             else:
                 dist=(t>>2)+(src[ip]<<2)+1;ip+=1;ln=2;st=t&3
         s=len(out)-dist
+        check_output(ln+st)
         for k in range(ln): out.append(out[s+k])
         if st: out+=src[ip:ip+st];ip+=st
         state=st

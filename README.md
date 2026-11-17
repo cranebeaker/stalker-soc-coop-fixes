@@ -110,7 +110,24 @@ add-on, which is why every player needs an identical copy. Each fix lives in its
 ```
 python build.py                    # writes build/zzz_soc_coop_fixes.db
 python build.py --sarcophagus-fps # same, with the optional Sarcophagus FPS fix
+python build.py --player-limit 8 # opt-in capacity 8; original four-player default is unchanged
 ```
+
+The optional capacity 8 profile builds from this repository, with no separate
+game archive or private work paths. Package it with
+`python tools/release.py 1.4.7 --player-limit 8 --no-boot`; it writes a separate
+`_players8.zip` containing the DB, generated profile, Windows installer and server
+selector. Installation patches only the exact supported local x86 DLL and keeps
+verified originals; Python is unnecessary on Windows. All players need the same
+package. Read the [English instructions](docs/PLAYER_LIMIT_8.en.md) or
+[инструкцию по-русски](docs/PLAYER_LIMIT_8.ru.md) for prerequisites, backups,
+rollback, session selection 1–8 and balance/saved-setting limits. The standard
+release retains its four-file ZIP format.
+
+Offline Python checks: `python -m unittest discover -s tests -p 'test_*.py'`.
+The optional PowerShell installer tests use an original supported local DLL via
+`COOP_TEST_DLL` and PowerShell via `COOP_PWSH` when outside PATH; they run on
+temporary game copies, without launching the game.
 
 `tools/` holds the archive reader (`xdb.py`, LZHUF index + LZO1X data), `extract.py`, `pack.py`,
 a Lua block checker and model checkers. `tools/boottest.ps1 -Levels <level> ...` boots levels on
