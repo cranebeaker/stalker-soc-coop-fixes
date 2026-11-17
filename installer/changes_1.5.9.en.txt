@@ -1,0 +1,5 @@
+New in v1.5.9
+
+- @marked_one: the game no longer crashes when the SSP-99 "Ecologist" Bodysuit (orange or green) is put on. Its worn model used a glass shader that the game does not have; it now uses the one the SEVA suit uses
+- @english_subtitles: the phrases of the repeatable quests (every quest giver, for example Kruglov), Garbage, Military, Mole and the Monolith dialogs now also show as bottom subtitles and reach the other players, like the rest of the dialogs (297 phrases had no subtitle hook)
+- Everybody has to install v1.5.9 (the add-on fingerprint changes). Saves of v1.5.8 keep working
